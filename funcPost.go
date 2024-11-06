@@ -26,12 +26,6 @@ var posts = []Post{
 		Date: "3 Jan 2012 19:10:23", Description: "I enjoy my life", Likes: 2},
 	{ID: 2, Title: "Monday", Author: profiles[0],
 		Date: "5 Jan 2024 23:04:40", Description: "AGAIN!!!!", Likes: 304},
-	// {ID: 0, Title: "Holiday", Author: profiles[0],
-	// 	Date: time.Date(2024, time.January, 16, 10, 9, 8, 7, time.UTC), Description: "It was a great holiday", Likes: 0},
-	// {ID: 1, Title: "Sunday", Author: profiles[2],
-	// 	Date: time.Date(2024, time.March, 24, 10, 9, 8, 7, time.UTC), Description: "I enjoy my life", Likes: 2},
-	// {ID: 2, Title: "Monday", Author: profiles[0],
-	// 	Date: time.Date(2024, time.April, 34, 10, 9, 8, 7, time.UTC), Description: "AGAIN!!!!", Likes: 304},
 }
 
 func GetPosts(c *gin.Context) {
@@ -56,23 +50,13 @@ func GetPostByID(c *gin.Context) {
 	c.JSON(http.StatusNotFound, gin.H{"message": "post not found"})
 }
 
-//	func NewPost(post *Post) Post {
-//		count_id++
-//		return Post{
-//			ID:    count_id,
-//			Date:  time.Now(), // Значение по умолчанию — текущая дата и время
-//			Likes: 0,          // Значение по умолчанию — строка "0"
-//		}
-//	}
 func CreatePost(c *gin.Context) {
 	var newPost Post
-	// var newPost_decode Post
-	// err := json.Unmarshal(newPost, &newPost_decode)
-
 	if err := c.BindJSON(&newPost); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "invalid request"})
 		return
 	}
+
 	fmt.Println(newPost)
 	for _, author := range profiles {
 		if newPost.Author.ID == author.ID {
