@@ -18,7 +18,8 @@ func Run() error {
 	}
 	print("Соединение с базой данных закрыто")
 
-	v1.Handler()
-
+	router := gin.Default()
+	v1.Apies()
+	router.Run(":8080")
 	return nil
 }
