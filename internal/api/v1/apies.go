@@ -1,26 +1,48 @@
 package v1
 
-import "github.com/gin-gonic/gin"
+import (
+	"ProjectONE/internal/service"
+
+	"github.com/gin-gonic/gin"
+)
 
 func Apies() {
-	profile := Router.Group("/profiles")
+	router := gin.Default()
+	// Получение всех профилей
+	//router.GET("/profiles", service.GetProfiles)
+	profiles := router.Group("/profiles")
 	{
 		// Получение всех профилей
-		profile.GET("/profiles", service.GetProfiles)
+		profiles.GET("", service.GetProfiles)
 
-		// // Получение поста по ID
-		// profile.GET("/profiles/:id", GetProfileByID)
+		// Получение поста по ID
+		profiles.GET("/:id", service.GetProfileById)
 
-		// // Создание нового профиля
-		// profile.POST("/profiles", CreateProfile)
+		// Создание нового профиля
+		profiles.POST("", service.CreateProfile)
 
-		// // Обновление существующего профиля
-		// profile.PUT("/profiles/:id", UpdateProfile)
+		// Обновление существующего профиля
+		profiles.PUT("/:id", service.UpdateProfile)
 
-		// // Удаление профиля
-		// profile.DELETE("/profiles/:id", DeleteProfile)
+		// Удаление профиля
+		profiles.DELETE("/:id", service.DeleteProfile)
 	}
-	post := Router
+	post := router.Group("/posts")
+	{
+		// Получение всех постов
+		post.GET("", service.GetPosts)
 
+		// Получение профиля по ID
+		post.GET("/:id", service.GetPostById)
 
+		// Создание новой поста
+		post.POST("", service.CreatePost)
+
+		// Обновление существующего поста
+		post.PUT("/:id", service.UpdatePost)
+
+		// Удаление поста
+		post.DELETE("/:id", service.DeletePost)
+	}
+	router.Run(":8080")
 }

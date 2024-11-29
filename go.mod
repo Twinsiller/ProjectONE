@@ -4,6 +4,7 @@ go 1.23.1
 
 require (
 	github.com/gin-gonic/gin v1.10.0
+	github.com/joho/godotenv v1.5.1
 	github.com/sirupsen/logrus v1.9.3
 )
 
@@ -37,5 +38,6 @@ require (
 
 require (
 	github.com/lib/pq v1.10.9
+	github.com/vzglad-smerti/password_hash v0.0.0-20151126002249-16da77469e78
 	golang.org/x/sys v0.27.0 // indirect
 )

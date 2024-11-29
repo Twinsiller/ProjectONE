@@ -30,8 +30,9 @@ func InitLogger(logFile string) {
 			Logger.Fatalf("Не удалось открыть файл логов: %v", err)
 		}
 		Logger.SetOutput(file)
-	} else {
-		// Если файл не указан, выводим логи в стандартный вывод (консоль)
-		Logger.SetOutput(os.Stdout)
+		return
 	}
+
+	// Если файл не указан, выводим логи в стандартный вывод (консоль)
+	Logger.SetOutput(os.Stdout)
 }

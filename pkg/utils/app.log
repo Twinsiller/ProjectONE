@@ -1,0 +1,24 @@
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-11-29T19:26:44+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-11-29T19:26:44+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-11-29T21:42:28+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-11-29T21:42:28+03:00"}
+{"level":"panic","msg":"Insert isn't done(profile_handler.go|UpdateProfile|):pq: отношение \"profiles\" не существует","time":"2024-11-29T21:44:45+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-11-29T21:45:33+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-11-29T21:45:33+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-11-30T00:22:39+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-11-30T00:22:39+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-11-30T00:23:27+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-11-30T00:23:27+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-11-30T00:23:48+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-11-30T00:23:48+03:00"}
+{"level":"info","msg":"[]","time":"2024-11-30T00:23:53+03:00"}
+{"level":"panic","msg":"Not correct request|(post_handler.go|GetPostByID|)|:sql: no rows in result set","time":"2024-11-30T00:23:59+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-11-30T00:32:36+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-11-30T00:32:36+03:00"}
+{"level":"panic","msg":"Not correct request|(post_handler.go|GetPostByID|)|:sql: no rows in result set","time":"2024-11-30T00:32:39+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-11-30T00:40:34+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-11-30T00:40:34+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-11-30T00:47:31+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-11-30T00:47:31+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-11-30T01:07:25+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-11-30T01:07:25+03:00"}

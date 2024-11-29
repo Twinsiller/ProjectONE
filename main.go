@@ -1,9 +1,12 @@
 package main
 
-import "ProjectONE/cmd"
+import (
+	"ProjectONE/cmd"
+	"fmt"
+)
 
 func main() {
-	if cmd.Run() != nil {
-		print("Запуск программы не сработал!!!")
+	if err := cmd.Run(); err != nil {
+		fmt.Printf("Запуск программы не сработал!!!\n%v", err)
 	}
 }
