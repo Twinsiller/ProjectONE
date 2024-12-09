@@ -18,19 +18,19 @@ import (
 var jwtKey = []byte(os.Getenv("JWT_SECRET"))
 
 type Credentials struct {
-	Username string `json:"username"`
+	Nickname string `json:"nickname"`
 	Password string `json:"password"`
 }
 
 type Claims struct {
-	Username string `json:"username"`
+	Nickname string `json:"nickname"`
 	jwt.StandardClaims
 }
 
-func generateToken(username string) (string, error) {
+func generateToken(nickname string) (string, error) {
 	expirationTime := time.Now().Add(20 * time.Minute)
 	claims := &Claims{
-		Username: username,
+		Nickname: nickname,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 		},
@@ -48,25 +48,28 @@ func login(c *gin.Context) {
 		return
 	}
 
-	row := database.DbPostgres.QueryRow("select nickname, hash_password from authors where nickname = $1", creds.Username)
+	row := database.DbPostgres.QueryRow("select nickname, hash_password from authors where nickname = $1", creds.Nickname)
 	pc := models.ProfileCheck{}
 	fmt.Println(row)
 	err := row.Scan(&pc.Nickname, &pc.HashPassword)
+	fmt.Println("\n\n", creds.Nickname, creds.Password)
 	fmt.Println(pc.Nickname, pc.HashPassword)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"message": "Bad check profile"})
 		return
 	}
-	if creds.Username != pc.Nickname {
+	if creds.Nickname != pc.Nickname {
 		c.JSON(http.StatusUnauthorized, gin.H{"message": "User doesn't exist"})
 		return
 	}
-	if ok, err := password.Verify(pc.HashPassword, creds.Password); ok == false || err != nil {
+	if ok, err := password.Verify(pc.HashPassword, creds.Password); !ok || err != nil {
+		fmt.Println("ok = ", ok)
+		fmt.Println("error = ", err)
 		c.JSON(http.StatusUnauthorized, gin.H{"message": "Password error!!!"})
 		return
 	}
 
-	token, err := generateToken(creds.Username)
+	token, err := generateToken(creds.Nickname)
 	if err != nil {
 		utils.Logger.Error(err)
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "could not create token"})

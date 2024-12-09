@@ -1,2 +1,23 @@
 {"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-02T15:22:00+03:00"}
 {"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-02T15:22:00+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-09T14:56:42+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-09T14:56:43+03:00"}
+{"level":"panic","msg":"Insert isn't done(profile_handler.go|CreateProfile|):pq: столбец \"hash_password\" в таблице \"authors\" не существует","time":"2024-12-09T15:04:26+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-09T15:05:35+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-09T15:05:35+03:00"}
+{"level":"panic","msg":"Insert isn't done(profile_handler.go|CreateProfile|):pq: столбец \"hash_password\" в таблице \"authors\" не существует","time":"2024-12-09T15:05:41+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-09T15:06:56+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-09T15:06:56+03:00"}
+{"level":"panic","msg":"Insert isn't done(profile_handler.go|CreateProfile|):pq: столбец \"hash_password\" в таблице \"authors\" не существует","time":"2024-12-09T15:06:59+03:00"}
+{"level":"panic","msg":"Insert isn't done(profile_handler.go|CreateProfile|):pq: столбец \"access_level\" в таблице \"authors\" не существует","time":"2024-12-09T15:07:46+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-09T15:07:54+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-09T15:07:54+03:00"}
+{"level":"panic","msg":"Insert isn't done(profile_handler.go|CreateProfile|):pq: столбец \"access_level\" в таблице \"authors\" не существует","time":"2024-12-09T15:07:59+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-09T15:15:20+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-09T15:15:20+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-09T15:20:25+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-09T15:20:25+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-09T15:23:12+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-09T15:23:12+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-09T15:47:17+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-09T15:47:17+03:00"}

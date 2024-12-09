@@ -68,8 +68,8 @@ func CreateProfile(c *gin.Context) {
 		p.HashPassword = hash
 	}
 
-	_, err := database.DbPostgres.Exec("insert into authors (nickname, hash_password, status, access_level, firstname, lastname) values ( $1, $2, $3, $4, $5, $6)",
-		p.Nickname, p.HashPassword, p.Status, p.AccessLevel, p.Firstname, p.Lastname,
+	_, err := database.DbPostgres.Exec("insert into authors (nickname, hash_password, access_level, firstname, lastname) values ( $1, $2, $3, $4, $5)",
+		p.Nickname, p.HashPassword, p.AccessLevel, p.Firstname, p.Lastname,
 	)
 	if err != nil {
 		utils.Logger.Panic("Insert isn't done(profile_handler.go|CreateProfile|):", err)
