@@ -12,3 +12,8 @@ type Profile struct {
 	Lastname     string    `json:"lastname"`
 	CreatedAt    time.Time `json:"createdat"`
 }
+
+type ProfileCheck struct {
+	Nickname     string `json:"nickname"`
+	HashPassword string `json:"hashpassword"`
+}

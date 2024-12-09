@@ -32,7 +32,7 @@ func GetProfiles(c *gin.Context) {
 		profiles = append(profiles, p)
 	}
 
-	utils.Logger.Printf("%v", profiles)
+	//utils.Logger.Printf("%v", profiles)
 
 	c.JSON(http.StatusOK, profiles)
 	profiles = []models.Profile{}

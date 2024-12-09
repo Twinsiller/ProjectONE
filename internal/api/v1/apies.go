@@ -8,9 +8,16 @@ import (
 
 func Apies() {
 	router := gin.Default()
+
+	// Создание нового профиля
+	router.POST("/register", service.CreateProfile)
+	// Проверка профиля
+	router.POST("/login", login)
+
 	// Получение всех профилей
 	//router.GET("/profiles", service.GetProfiles)
 	profiles := router.Group("/profiles")
+	profiles.Use(authMiddleware())
 	{
 		// Получение всех профилей
 		profiles.GET("", service.GetProfiles)
@@ -18,31 +25,30 @@ func Apies() {
 		// Получение поста по ID
 		profiles.GET("/:id", service.GetProfileById)
 
-		// Создание нового профиля
-		profiles.POST("", service.CreateProfile)
-
 		// Обновление существующего профиля
 		profiles.PUT("/:id", service.UpdateProfile)
 
 		// Удаление профиля
 		profiles.DELETE("/:id", service.DeleteProfile)
 	}
-	post := router.Group("/posts")
+
+	posts := router.Group("/posts")
+	posts.Use(authMiddleware())
 	{
 		// Получение всех постов
-		post.GET("", service.GetPosts)
+		posts.GET("", service.GetPosts)
 
 		// Получение профиля по ID
-		post.GET("/:id", service.GetPostById)
+		posts.GET("/:id", service.GetPostById)
 
 		// Создание новой поста
-		post.POST("", service.CreatePost)
+		posts.POST("", service.CreatePost)
 
 		// Обновление существующего поста
-		post.PUT("/:id", service.UpdatePost)
+		posts.PUT("/:id", service.UpdatePost)
 
 		// Удаление поста
-		post.DELETE("/:id", service.DeletePost)
+		posts.DELETE("/:id", service.DeletePost)
 	}
 	router.Run(":8080")
 }
