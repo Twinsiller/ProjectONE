@@ -14,6 +14,7 @@ import (
 var comments = []models.Comment{}
 
 // @Summary      Get all comments
+// @Security		ApiKeyAuth
 // @Description  Retrieve a list of all comments from the database
 // @Tags         comments
 // @Produce      json
@@ -45,8 +46,8 @@ func GetComments(c *gin.Context) {
 	comments = []models.Comment{}
 }
 
-// GetCommentById godoc
 // @Summary      Get comment by ID
+// @Security		ApiKeyAuth
 // @Description  Retrieve a specific comment by its ID from the database
 // @Tags         comments
 // @Produce      json
@@ -69,6 +70,7 @@ func GetCommentById(c *gin.Context) {
 }
 
 // @Summary      Create a comment
+// @Security		ApiKeyAuth
 // @Description  Add a new comment to the database
 // @Tags         comments
 // @Accept       json
@@ -100,6 +102,7 @@ func CreateComment(c *gin.Context) {
 }
 
 // @Summary      Update a comment
+// @Security		ApiKeyAuth
 // @Description  Update an existing comment's information by its ID
 // @Tags         comments
 // @Accept       json
@@ -134,6 +137,7 @@ func UpdateComment(c *gin.Context) {
 }
 
 // @Summary      Delete a comment
+// @Security		ApiKeyAuth
 // @Description  Remove a comment from the database by its ID
 // @Tags         comments
 // @Produce      json

@@ -17,6 +17,11 @@ const docTemplate = `{
     "paths": {
         "/comments": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieve a list of all comments from the database",
                 "produces": [
                     "application/json"
@@ -44,6 +49,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Add a new comment to the database",
                 "consumes": [
                     "application/json"
@@ -90,6 +100,11 @@ const docTemplate = `{
         },
         "/comments/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieve a specific comment by its ID from the database",
                 "produces": [
                     "application/json"
@@ -123,6 +138,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update an existing comment's information by its ID",
                 "consumes": [
                     "application/json"
@@ -180,6 +200,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Remove a comment from the database by its ID",
                 "produces": [
                     "application/json"
@@ -267,6 +292,11 @@ const docTemplate = `{
         },
         "/v1/posts": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieve a list of all posts in the system",
                 "consumes": [
                     "application/json"
@@ -278,6 +308,20 @@ const docTemplate = `{
                     "posts"
                 ],
                 "summary": "Get all posts",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Page number (default: 1)",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Number of profiles per page (default: 5)",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -297,6 +341,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Create a new post with title, description, and author information",
                 "consumes": [
                     "application/json"
@@ -343,6 +392,11 @@ const docTemplate = `{
         },
         "/v1/posts/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieve a post's details by its unique ID",
                 "consumes": [
                     "application/json"
@@ -385,6 +439,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update the details of an existing post by its ID",
                 "consumes": [
                     "application/json"
@@ -442,6 +501,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete an existing post by its unique ID",
                 "consumes": [
                     "application/json"
@@ -484,8 +548,76 @@ const docTemplate = `{
                 }
             }
         },
+        "/v1/profiles": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Retrieve a list of profiles for a specific account by account ID with pagination",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "authors"
+                ],
+                "summary": "Get profiles",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Page number (default: 1)",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Number of profiles per page (default: 5)",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Profile"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/service.errorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/service.errorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/service.errorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/v1/profiles/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieve a specific profile by its ID",
                 "consumes": [
                     "application/json"
@@ -534,6 +666,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Update an existing profile's information by profile ID",
                 "consumes": [
                     "application/json"
@@ -591,6 +728,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Delete a profile from the system by its ID",
                 "consumes": [
                     "application/json"

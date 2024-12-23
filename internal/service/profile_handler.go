@@ -6,6 +6,7 @@ import (
 	"ProjectONE/pkg/utils"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	password "github.com/vzglad-smerti/password_hash"
 
@@ -14,19 +15,35 @@ import (
 
 var profiles = []models.Profile{}
 
-// @Summary		Get profiles by account ID
-// @Description	Retrieve a list of profiles for a specific account by account ID
+// @Summary		Get profiles
+// @Security		ApiKeyAuth
+// @Description	Retrieve a list of profiles for a specific account by account ID with pagination
 // @Tags			authors
 // @Accept			json
 // @Produce		json
-// @Param			id	path		int	true	"Account ID"
-// @Success		200	{array}		models.Profile
-// @Failure		400	{object}	errorResponse
-// @Failure		404	{object}	errorResponse
-// @Failure		500	{object}	errorResponse
-// @Router			/v1/profiles/{id} [get]
+// @Param			page	query		int		false	"Page number (default: 1)"
+// @Param			limit	query		int		false	"Number of profiles per page (default: 5)"
+// @Success		200		{array}		models.Profile
+// @Failure		400		{object}	errorResponse
+// @Failure		404		{object}	errorResponse
+// @Failure		500		{object}	errorResponse
+// @Router			/v1/profiles [get]
 func GetProfiles(c *gin.Context) {
-	rows, err := database.DbPostgres.Query("select * from authors")
+	// Получение параметров из запроса
+	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))   // Номер страницы, по умолчанию 1
+	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "5")) // Количество элементов на странице, по умолчанию 5
+
+	if page < 1 {
+		page = 1
+	}
+	if limit < 1 {
+		limit = 5
+	}
+
+	offset := (page - 1) * limit // Вычисление смещения
+
+	// SQL-запрос с лимитом и смещением
+	rows, err := database.DbPostgres.Query("select * from authors limit $1 offset $2", limit, offset)
 	if err != nil {
 		utils.Logger.Panic(err)
 		return
@@ -50,6 +67,7 @@ func GetProfiles(c *gin.Context) {
 }
 
 // @Summary		Get profile by ID
+// @Security		ApiKeyAuth
 // @Description	Retrieve a specific profile by its ID
 // @Tags			authors
 // @Accept			json
@@ -114,6 +132,7 @@ func CreateProfile(c *gin.Context) {
 }
 
 // @Summary		Update an existing profile
+// @Security		ApiKeyAuth
 // @Description	Update an existing profile's information by profile ID
 // @Tags			authors
 // @Accept			json
@@ -155,6 +174,7 @@ func UpdateProfile(c *gin.Context) {
 }
 
 // @Summary		Delete a profile by ID
+// @Security		ApiKeyAuth
 // @Description	Delete a profile from the system by its ID
 // @Tags			authors
 // @Accept			json

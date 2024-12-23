@@ -6,6 +6,7 @@ import (
 	"ProjectONE/pkg/utils"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,15 +14,32 @@ import (
 var posts = []models.Post{}
 
 // @Summary		Get all posts
+// @Security		ApiKeyAuth
 // @Description	Retrieve a list of all posts in the system
 // @Tags			posts
 // @Accept			json
 // @Produce		json
+// @Param			page	query		int		false	"Page number (default: 1)"
+// @Param			limit	query		int		false	"Number of profiles per page (default: 5)"
 // @Success		200	{array}	models.Post
 // @Failure		500	{object}	errorResponse
 // @Router			/v1/posts [get]
 func GetPosts(c *gin.Context) {
-	rows, err := database.DbPostgres.Query("select id, id_author, title, description, date_publication, date_last_modified, likes from posts")
+	// Получение параметров из запроса
+	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))   // Номер страницы, по умолчанию 1
+	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "5")) // Количество элементов на странице, по умолчанию 5
+
+	if page < 1 {
+		page = 1
+	}
+	if limit < 1 {
+		limit = 5
+	}
+
+	offset := (page - 1) * limit // Вычисление смещения
+
+	// SQL-запрос с лимитом и смещением
+	rows, err := database.DbPostgres.Query("select id, id_author, title, description, date_publication, date_last_modified, likes from posts limit $1 offset $2", limit, offset)
 	if err != nil {
 		utils.Logger.Panic(err)
 		return
@@ -38,13 +56,14 @@ func GetPosts(c *gin.Context) {
 		posts = append(posts, p)
 	}
 
-	utils.Logger.Printf("%v", posts)
+	//utils.Logger.Printf("%v", posts)
 
 	c.JSON(http.StatusOK, posts)
 	posts = []models.Post{}
 }
 
 // @Summary		Get a post by ID
+// @Security		ApiKeyAuth
 // @Description	Retrieve a post's details by its unique ID
 // @Tags			posts
 // @Accept			json
@@ -72,6 +91,7 @@ func GetPostById(c *gin.Context) {
 }
 
 // @Summary		Create a new post
+// @Security		ApiKeyAuth
 // @Description	Create a new post with title, description, and author information
 // @Tags			posts
 // @Accept			json
@@ -103,6 +123,7 @@ func CreatePost(c *gin.Context) {
 }
 
 // @Summary		Update an existing post
+// @Security		ApiKeyAuth
 // @Description	Update the details of an existing post by its ID
 // @Tags			posts
 // @Accept			json
@@ -137,6 +158,7 @@ func UpdatePost(c *gin.Context) {
 }
 
 // @Summary		Delete a post by ID
+// @Security		ApiKeyAuth
 // @Description	Delete an existing post by its unique ID
 // @Tags			posts
 // @Accept			json

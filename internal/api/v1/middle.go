@@ -82,12 +82,14 @@ func login(c *gin.Context) {
 func authMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		tokenString := strings.Split(c.GetHeader("Authorization"), " ")
-		//fmt.Println("\n\n", tokenString)
+		fmt.Println("\n\n", tokenString)
 		claims := &Claims{}
-		//fmt.Println("\n\nclaims.Username ", claims.Username)
+		fmt.Println("\n\nclaims.Username ", claims.Nickname)
 		token, err := jwt.ParseWithClaims(tokenString[1], claims, func(token *jwt.Token) (interface{}, error) {
 			return jwtKey, nil
 		})
+
+		fmt.Println("\n\ntoken ", token)
 
 		if err != nil || !token.Valid {
 			c.JSON(http.StatusUnauthorized, gin.H{"message": "unauthorized"})
