@@ -14,6 +14,17 @@ import (
 
 var profiles = []models.Profile{}
 
+// @Summary		Get profiles by account ID
+// @Description	Retrieve a list of profiles for a specific account by account ID
+// @Tags			authors
+// @Accept			json
+// @Produce		json
+// @Param			id	path		int	true	"Account ID"
+// @Success		200	{array}		models.Profile
+// @Failure		400	{object}	errorResponse
+// @Failure		404	{object}	errorResponse
+// @Failure		500	{object}	errorResponse
+// @Router			/v1/profiles/{id} [get]
 func GetProfiles(c *gin.Context) {
 	rows, err := database.DbPostgres.Query("select * from authors")
 	if err != nil {
@@ -38,6 +49,17 @@ func GetProfiles(c *gin.Context) {
 	profiles = []models.Profile{}
 }
 
+// @Summary		Get profile by ID
+// @Description	Retrieve a specific profile by its ID
+// @Tags			authors
+// @Accept			json
+// @Produce		json
+// @Param			id	path		int	true	"Account ID"
+// @Success		200	{object}	models.Profile
+// @Failure		400	{object}	errorResponse
+// @Failure		404	{object}	errorResponse
+// @Failure		500	{object}	errorResponse
+// @Router			/v1/profiles/{id} [get]
 func GetProfileById(c *gin.Context) {
 	//utils.Logger.Info("GetProfileByID is working\n(profile_handler.go|GetProfileByID|):\n")
 	id := c.Param("id")
@@ -52,6 +74,16 @@ func GetProfileById(c *gin.Context) {
 	c.JSON(http.StatusOK, p)
 }
 
+// @Summary		Create a new profile
+// @Description	Creates a new profile by accepting profile details in the request body
+// @Tags			authors
+// @Accept			json
+// @Produce		json
+// @Param			profile	body		models.Profile	true	"Profile data"
+// @Success		201	{object}	models.Profile
+// @Failure		400	{object}	errorResponse
+// @Failure		500	{object}	errorResponse
+// @Router			/register [post]
 func CreateProfile(c *gin.Context) {
 	p := models.Profile{}
 
@@ -77,9 +109,22 @@ func CreateProfile(c *gin.Context) {
 	}
 	// fmt.Println(result.LastInsertId()) // не поддерживается (Из-за Postgres)
 	// fmt.Println(result.RowsAffected()) // количество добавленных строк
+
 	c.JSON(http.StatusCreated, p)
 }
 
+// @Summary		Update an existing profile
+// @Description	Update an existing profile's information by profile ID
+// @Tags			authors
+// @Accept			json
+// @Produce		json
+// @Param			id		path		int			true	"Profile ID"
+// @Param			profile	body		models.Profile	true	"Updated profile data"
+// @Success		202	{object}	models.Profile
+// @Failure		400	{object}	errorResponse
+// @Failure		404	{object}	errorResponse
+// @Failure		500	{object}	errorResponse
+// @Router			/v1/profiles/{id} [put]
 func UpdateProfile(c *gin.Context) {
 	id := c.Param("id")
 	p := models.Profile{}
@@ -109,6 +154,16 @@ func UpdateProfile(c *gin.Context) {
 	c.JSON(http.StatusAccepted, p)
 }
 
+// @Summary		Delete a profile by ID
+// @Description	Delete a profile from the system by its ID
+// @Tags			authors
+// @Accept			json
+// @Produce		json
+// @Param			id		path		int	true	"Profile ID"
+// @Success		202	{object}	string
+// @Failure		404	{object}	errorResponse
+// @Failure		500	{object}	errorResponse
+// @Router			/v1/profiles/{id} [delete]
 func DeleteProfile(c *gin.Context) {
 	id := c.Param("id")
 

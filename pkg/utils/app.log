@@ -21,3 +21,52 @@
 {"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-09T15:23:12+03:00"}
 {"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-09T15:47:17+03:00"}
 {"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-09T15:47:17+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-22T15:14:47+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-22T15:14:47+03:00"}
+{"level":"info","msg":"[]","time":"2024-12-22T15:54:47+03:00"}
+{"level":"info","msg":"[]","time":"2024-12-22T15:55:20+03:00"}
+{"level":"info","msg":"[]","time":"2024-12-22T15:56:52+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-22T15:57:39+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-22T15:57:39+03:00"}
+{"level":"info","msg":"[{1 Rope 2 It will be a great holiday 0 2024-11-30 01:07:33.046117 +0300 MSK 2024-11-30 01:07:33.046117 +0300 MSK}]","time":"2024-12-22T15:57:43+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-22T17:19:56+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-22T17:19:57+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-22T17:20:25+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-22T17:20:25+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-22T18:50:52+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-22T18:50:52+03:00"}
+{"level":"info","msg":"[{1 Rope 2 It will be a great holiday 0 2024-11-30 01:07:33.046117 +0300 MSK 2024-11-30 01:07:33.046117 +0300 MSK}]","time":"2024-12-22T18:51:15+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-22T19:01:44+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-22T19:01:44+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-22T19:02:32+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-22T19:02:32+03:00"}
+{"level":"panic","msg":"Not correct request|(comment_handler.go|GetCommentById|)|:sql: Scan error on column index 2, name \"text\": converting driver.Value type string (\"fsdfsd sdf sdf sdf aewr adas fsd sdf sdf  fsddfsdfsdf\") to a int: invalid syntax","time":"2024-12-22T19:18:41+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-22T19:19:38+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-22T19:19:38+03:00"}
+{"level":"info","msg":"[{1 Rope 2 It will be a great holiday 0 2024-11-30 01:07:33.046117 +0300 MSK 2024-11-30 01:07:33.046117 +0300 MSK}]","time":"2024-12-22T19:55:30+03:00"}
+{"level":"info","msg":"[{1 Rope 2 It will be a great holiday 0 2024-11-30 01:07:33.046117 +0300 MSK 2024-11-30 01:07:33.046117 +0300 MSK} {2 Wow 7 It is magic 0 2024-12-22 19:56:56.343731 +0300 MSK 2024-12-22 19:56:56.343731 +0300 MSK}]","time":"2024-12-22T19:57:08+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-22T19:59:50+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-22T19:59:50+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-22T20:00:48+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-22T20:00:48+03:00"}
+{"level":"info","msg":"[{1 Rope 2 It will be a great holiday 0 2024-11-30 01:07:33.046117 +0300 MSK 2024-11-30 01:07:33.046117 +0300 MSK} {2 Wow 7 It is magic 0 2024-12-22 19:56:56.343731 +0300 MSK 2024-12-22 19:56:56.343731 +0300 MSK}]","time":"2024-12-22T20:00:55+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-22T20:02:01+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-22T20:02:01+03:00"}
+{"level":"info","msg":"[{1 Rope 2 It will be a great holiday 0 2024-11-30 01:07:33.046117 +0300 MSK 2024-11-30 01:07:33.046117 +0300 MSK} {2 Wow 7 It is magic 0 2024-12-22 19:56:56.343731 +0300 MSK 2024-12-22 19:56:56.343731 +0300 MSK}]","time":"2024-12-22T20:02:10+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-22T20:07:47+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-22T20:07:47+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-22T20:08:43+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-22T20:08:43+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-22T23:12:12+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-22T23:12:12+03:00"}
+{"level":"panic","msg":"Insert isn't done(profile_handler.go|CreateProfile|):pq: значение NULL в столбце \"status\" отношения \"authors\" нарушает ограничение NOT NULL","time":"2024-12-22T23:52:24+03:00"}
+{"level":"panic","msg":"Insert isn't done(profile_handler.go|CreateProfile|):pq: значение NULL в столбце \"status\" отношения \"authors\" нарушает ограничение NOT NULL","time":"2024-12-22T23:55:42+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-23T02:16:21+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-23T02:16:21+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-23T02:53:26+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-23T02:53:26+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-23T02:57:07+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-23T02:57:07+03:00"}
+{"level":"panic","msg":"Insert isn't done(profile_handler.go|CreateProfile|):pq: значение NULL в столбце \"status\" отношения \"authors\" нарушает ограничение NOT NULL","time":"2024-12-23T02:58:45+03:00"}
+{"level":"panic","msg":"Insert isn't done(profile_handler.go|CreateProfile|):pq: значение NULL в столбце \"status\" отношения \"authors\" нарушает ограничение NOT NULL","time":"2024-12-23T03:07:43+03:00"}
+{"level":"panic","msg":"Insert isn't done(profile_handler.go|CreateProfile|):pq: значение NULL в столбце \"status\" отношения \"authors\" нарушает ограничение NOT NULL","time":"2024-12-23T03:10:05+03:00"}

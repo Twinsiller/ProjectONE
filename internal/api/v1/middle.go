@@ -28,7 +28,7 @@ type Claims struct {
 }
 
 func generateToken(nickname string) (string, error) {
-	expirationTime := time.Now().Add(20 * time.Minute)
+	expirationTime := time.Now().Add(20 * time.Hour)
 	claims := &Claims{
 		Nickname: nickname,
 		StandardClaims: jwt.StandardClaims{
