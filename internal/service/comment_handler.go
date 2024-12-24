@@ -20,9 +20,10 @@ var comments = []models.Comment{}
 // @Produce      json
 // @Success      200 {array} models.Comment
 // @Failure      500 {object} errorResponse
-// @Router       /comments [get]
+// @Router       /v1/comments [get]
 func GetComments(c *gin.Context) {
 	rows, err := database.DbPostgres.Query("select * from comments")
+	fmt.Println(rows)
 	if err != nil {
 		utils.Logger.Panic(err)
 		return
@@ -54,7 +55,7 @@ func GetComments(c *gin.Context) {
 // @Param        id   path      int  true  "Comment ID"
 // @Success      200  {object}  models.Comment
 // @Failure      404  {object}  errorResponse
-// @Router       /comments/{id} [get]
+// @Router       /v1/comments/{id} [get]
 func GetCommentById(c *gin.Context) {
 	//utils.Logger.Info("GetCommentById is working\n(comment_handler.go|GetCommentById|):\n")
 	id := c.Param("id")
@@ -79,7 +80,7 @@ func GetCommentById(c *gin.Context) {
 // @Success      201      {object}  models.Comment
 // @Failure      400      {object}  errorResponse
 // @Failure      500      {object}  errorResponse
-// @Router       /comments [post]
+// @Router       /v1/comments [post]
 func CreateComment(c *gin.Context) {
 	cm := models.Comment{}
 
@@ -89,7 +90,7 @@ func CreateComment(c *gin.Context) {
 		return
 	}
 
-	_, err := database.DbPostgres.Exec("insert into comments (id_author, id_post, text) values ( $1, $2, $3)",
+	_, err := database.DbPostgres.Exec("insert into comments (id_author, id_post, text_comment) values ( $1, $2, $3)",
 		cm.IdAuthor, cm.IdPost, cm.Text,
 	)
 	if err != nil {
@@ -113,7 +114,7 @@ func CreateComment(c *gin.Context) {
 // @Failure      400      {object}  errorResponse
 // @Failure      404      {object}  errorResponse
 // @Failure      500      {object}  errorResponse
-// @Router       /comments/{id} [put]
+// @Router       /v1/comments/{id} [put]
 func UpdateComment(c *gin.Context) {
 	id := c.Param("id")
 	cm := models.Comment{}
@@ -124,7 +125,7 @@ func UpdateComment(c *gin.Context) {
 		return
 	}
 
-	_, err := database.DbPostgres.Exec("UPDATE comments SET id_author = $1, id_post = $2, text = $3, date_last_modified = $4 WHERE id = $7",
+	_, err := database.DbPostgres.Exec("UPDATE comments SET id_author = $1, id_post = $2, text_comment = $3, date_last_modified = $4 WHERE id = $7",
 		cm.IdAuthor, cm.IdPost, cm.Text, time.Now(), id,
 	)
 	if err != nil {
@@ -145,7 +146,7 @@ func UpdateComment(c *gin.Context) {
 // @Success      202  {object}  string
 // @Failure      404  {object}  errorResponse
 // @Failure      500  {object}  errorResponse
-// @Router       /comments/{id} [delete]
+// @Router       /v1/comments/{id} [delete]
 func DeleteComment(c *gin.Context) {
 	id := c.Param("id")
 

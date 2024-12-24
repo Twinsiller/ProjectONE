@@ -94,7 +94,7 @@ func GetProfileById(c *gin.Context) {
 
 // @Summary		Create a new profile
 // @Description	Creates a new profile by accepting profile details in the request body
-// @Tags			authors
+// @Tags			sign
 // @Accept			json
 // @Produce		json
 // @Param			profile	body		models.Profile	true	"Profile data"
@@ -112,6 +112,7 @@ func CreateProfile(c *gin.Context) {
 	}
 
 	if hash, err := password.Hash(p.HashPassword); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Problem with password hashing"})
 		utils.Logger.Panic("Hash wasn't working(profile_handler.go|CreateProfile|):", err)
 		return
 	} else {

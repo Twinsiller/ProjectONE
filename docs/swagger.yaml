@@ -12,7 +12,7 @@ definitions:
         type: integer
       id_post:
         type: integer
-      text:
+      text_comment:
         type: string
     type: object
   models.Post:
@@ -56,6 +56,23 @@ definitions:
       message:
         type: string
     type: object
+  v1.Credentials:
+    properties:
+      nickname:
+        type: string
+      password:
+        type: string
+    type: object
+  v1.errorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  v1.statusResponse:
+    properties:
+      status:
+        type: string
+    type: object
 host: localhost:8080
 info:
   contact: {}
@@ -63,7 +80,72 @@ info:
   title: ProjectONE
   version: "1.0"
 paths:
-  /comments:
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: Login using nickname and password to generate a JWT token
+      parameters:
+      - description: User credentials
+        in: body
+        name: creds
+        required: true
+        schema:
+          $ref: '#/definitions/v1.Credentials'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: JWT token
+          schema:
+            $ref: '#/definitions/v1.statusResponse'
+        "400":
+          description: Invalid request
+          schema:
+            $ref: '#/definitions/v1.errorResponse'
+        "401":
+          description: Unauthorized error
+          schema:
+            $ref: '#/definitions/v1.errorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/v1.errorResponse'
+      summary: User login
+      tags:
+      - sign
+  /register:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new profile by accepting profile details in the request
+        body
+      parameters:
+      - description: Profile data
+        in: body
+        name: profile
+        required: true
+        schema:
+          $ref: '#/definitions/models.Profile'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Profile'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/service.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/service.errorResponse'
+      summary: Create a new profile
+      tags:
+      - sign
+  /v1/comments:
     get:
       description: Retrieve a list of all comments from the database
       produces:
@@ -115,7 +197,7 @@ paths:
       summary: Create a comment
       tags:
       - comments
-  /comments/{id}:
+  /v1/comments/{id}:
     delete:
       description: Remove a comment from the database by its ID
       parameters:
@@ -208,37 +290,6 @@ paths:
       summary: Update a comment
       tags:
       - comments
-  /register:
-    post:
-      consumes:
-      - application/json
-      description: Creates a new profile by accepting profile details in the request
-        body
-      parameters:
-      - description: Profile data
-        in: body
-        name: profile
-        required: true
-        schema:
-          $ref: '#/definitions/models.Profile'
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            $ref: '#/definitions/models.Profile'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/service.errorResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/service.errorResponse'
-      summary: Create a new profile
-      tags:
-      - authors
   /v1/posts:
     get:
       consumes:

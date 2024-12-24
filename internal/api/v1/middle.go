@@ -41,6 +41,17 @@ func generateToken(nickname string) (string, error) {
 	return token.SignedString(jwtKey)
 }
 
+// @Summary User login
+// @Description Login using nickname and password to generate a JWT token
+// @Tags sign
+// @Accept json
+// @Produce json
+// @Param creds body Credentials true "User credentials"
+// @Success 200 {object} statusResponse "JWT token"
+// @Failure 400 {object} errorResponse "Invalid request"
+// @Failure 401 {object} errorResponse "Unauthorized error"
+// @Failure 500 {object} errorResponse "Internal server error"
+// @Router /login [post]
 func login(c *gin.Context) {
 	var creds Credentials
 	if err := c.BindJSON(&creds); err != nil {
@@ -50,10 +61,10 @@ func login(c *gin.Context) {
 
 	row := database.DbPostgres.QueryRow("select nickname, hash_password from authors where nickname = $1", creds.Nickname)
 	pc := models.ProfileCheck{}
-	fmt.Println(row)
+	//fmt.Println(row)
 	err := row.Scan(&pc.Nickname, &pc.HashPassword)
-	fmt.Println("\n\n", creds.Nickname, creds.Password)
-	fmt.Println(pc.Nickname, pc.HashPassword)
+	//fmt.Println("\n\n", creds.Nickname, creds.Password)
+	//fmt.Println(pc.Nickname, pc.HashPassword)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"message": "Bad check profile"})
 		return
