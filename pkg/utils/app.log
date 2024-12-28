@@ -27,3 +27,5 @@
 {"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-23T15:34:03+03:00"}
 {"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-23T15:41:59+03:00"}
 {"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-23T15:41:59+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-26T21:18:51+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-26T21:18:51+03:00"}

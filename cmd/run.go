@@ -13,9 +13,9 @@ func Run() error {
 	utils.InitLogger("pkg/utils/app.log")
 
 	// Загружаем переменные окружения из файла .env
-	err := godotenv.Load()
-	if err != nil {
-		utils.Logger.Fatalf("Ошибка загрузки .env файла: %v", err)
+	if err := godotenv.Load(); err != nil {
+		utils.Logger.Fatalf("Error loading .env file")
+		return err
 	}
 
 	if err := database.Connect(database.LoadConfigFromEnv()); err != nil {
