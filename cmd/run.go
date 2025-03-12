@@ -3,6 +3,7 @@ package cmd
 import (
 	v1 "ProjectONE/internal/api/v1"
 	database "ProjectONE/internal/database/postgres"
+	"ProjectONE/internal/models"
 	"ProjectONE/pkg/utils"
 
 	"github.com/joho/godotenv"
@@ -22,6 +23,7 @@ func Run() error {
 		return err
 	}
 	defer database.Close()
+	database.CreateObjDB(&models.Profile{}, &models.Post{}, &models.Comment{})
 	v1.Apies()
 
 	return nil

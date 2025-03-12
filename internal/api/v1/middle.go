@@ -27,6 +27,7 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
+// generateToken создает новый JWT токен с данными пользователя и временем истечения
 func generateToken(nickname string) (string, error) {
 	expirationTime := time.Now().Add(20 * time.Hour)
 	claims := &Claims{
@@ -54,32 +55,27 @@ func generateToken(nickname string) (string, error) {
 // @Router /login [post]
 func login(c *gin.Context) {
 	var creds Credentials
+	// Привязываем данные из запроса в структуру Credentials
 	if err := c.BindJSON(&creds); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "invalid request"})
 		return
 	}
 
-	row := database.DbPostgres.QueryRow("select nickname, hash_password from authors where nickname = $1", creds.Nickname)
-	pc := models.ProfileCheck{}
-	//fmt.Println(row)
-	err := row.Scan(&pc.Nickname, &pc.HashPassword)
-	//fmt.Println("\n\n", creds.Nickname, creds.Password)
-	//fmt.Println(pc.Nickname, pc.HashPassword)
-	if err != nil {
+	// Используем GORM для получения данных пользователя
+	var pc models.ProfileCheck
+	if err := database.DbPostgres.Where("nickname = ?", creds.Nickname).First(&pc).Error; err != nil {
+		// Если не найдено, то возвращаем ошибку
 		c.JSON(http.StatusUnauthorized, gin.H{"message": "Bad check profile"})
 		return
 	}
-	if creds.Nickname != pc.Nickname {
-		c.JSON(http.StatusUnauthorized, gin.H{"message": "User doesn't exist"})
-		return
-	}
+
+	// Проверяем, совпадает ли введенный пароль с сохраненным хешом
 	if ok, err := password.Verify(pc.HashPassword, creds.Password); !ok || err != nil {
-		fmt.Println("ok = ", ok)
-		fmt.Println("error = ", err)
 		c.JSON(http.StatusUnauthorized, gin.H{"message": "Password error!!!"})
 		return
 	}
 
+	// Генерируем токен
 	token, err := generateToken(creds.Nickname)
 	if err != nil {
 		utils.Logger.Error(err)
@@ -87,27 +83,36 @@ func login(c *gin.Context) {
 		return
 	}
 
+	// Отправляем ответ с токеном
 	c.JSON(http.StatusOK, gin.H{"token": token})
 }
 
+// authMiddleware - middleware для проверки валидности JWT токена
 func authMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		// Получаем JWT токен из заголовка
 		tokenString := strings.Split(c.GetHeader("Authorization"), " ")
-		fmt.Println("\n\n", tokenString)
+		if len(tokenString) != 2 {
+			c.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized"})
+			c.Abort()
+			return
+		}
+
+		// Инициализируем структуру для хранения данных токена
 		claims := &Claims{}
-		fmt.Println("\n\nclaims.Username ", claims.Nickname)
+		// Пытаемся распарсить токен
 		token, err := jwt.ParseWithClaims(tokenString[1], claims, func(token *jwt.Token) (interface{}, error) {
 			return jwtKey, nil
 		})
 
-		fmt.Println("\n\ntoken ", token)
-
+		// Если токен невалиден или произошла ошибка, отклоняем запрос
 		if err != nil || !token.Valid {
 			c.JSON(http.StatusUnauthorized, gin.H{"message": "unauthorized"})
 			c.Abort()
 			return
 		}
-		//fmt.Printf("%v %v", claims.Username, claims.StandardClaims.ExpiresAt)
+
+		// Если токен валиден, передаем выполнение дальше
 		c.Next()
 	}
 }

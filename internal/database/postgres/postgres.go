@@ -4,13 +4,18 @@ import (
 	"ProjectONE/pkg/utils"
 	"database/sql"
 	"fmt"
+	"log"
 	"os"
 
 	_ "github.com/lib/pq" // Импортируем PostgreSQL драйвер
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 // DB — глобальная переменная для хранения подключения к базе данных
-var DbPostgres *sql.DB
+var DbPostgres *gorm.DB
+var sqlDB *sql.DB
 
 // Config — структура для хранения конфигурации подключения
 type Config struct {
@@ -45,24 +50,37 @@ func Connect(cfg Config) error {
 	)
 	utils.Logger.Printf("Проверка подключения\n%s", dsn)
 	var err error
-	DbPostgres, err = sql.Open("postgres", dsn)
+	DbPostgres, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Info),
+	})
 	if err != nil {
-		return fmt.Errorf("ошибка подключения к базе данных: %w", err)
+		return fmt.Errorf("Ошибка подключения к базе данных: %w", err)
 	}
 
 	// Проверяем соединение
-	if err = DbPostgres.Ping(); err != nil {
-		return fmt.Errorf("база данных недоступна: %w", err)
+	sqlDB, err := DbPostgres.DB()
+	if err != nil {
+		log.Fatal("Ошибка получения sql.DB: ", err)
+	}
+	if err := sqlDB.Ping(); err != nil {
+		log.Fatal("БД недоступна: ", err)
 	}
 
 	utils.Logger.Info("Успешное подключение к базе данных")
 	return nil
 }
 
+func CreateObjDB(dst ...interface{}) {
+	// dst = &models.Profile{}, &models.Post{}, &models.Comment{}
+	if err := DbPostgres.AutoMigrate(dst); err != nil {
+		log.Fatalf("Ошибка миграции: %v", err)
+	}
+}
+
 // Close закрывает соединение с базой данных
 func Close() error {
-	if DbPostgres != nil {
-		if err := DbPostgres.Close(); err != nil {
+	if DbPostgres != nil && sqlDB != nil {
+		if err := sqlDB.Close(); err != nil {
 			return err
 		}
 	}
