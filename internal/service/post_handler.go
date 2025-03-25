@@ -4,14 +4,13 @@ import (
 	database "ProjectONE/internal/database/postgres"
 	"ProjectONE/internal/models"
 	"ProjectONE/pkg/utils"
-	"fmt"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
-
-var posts = []models.Post{}
 
 // @Summary		Get all posts
 // @Security		ApiKeyAuth
@@ -20,14 +19,13 @@ var posts = []models.Post{}
 // @Accept			json
 // @Produce		json
 // @Param			page	query		int		false	"Page number (default: 1)"
-// @Param			limit	query		int		false	"Number of profiles per page (default: 5)"
+// @Param			limit	query		int		false	"Number of posts per page (default: 5)"
 // @Success		200	{array}	models.Post
 // @Failure		500	{object}	errorResponse
 // @Router			/v1/posts [get]
 func GetPosts(c *gin.Context) {
-	// Получение параметров из запроса
-	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))   // Номер страницы, по умолчанию 1
-	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "5")) // Количество элементов на странице, по умолчанию 5
+	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
+	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "5"))
 
 	if page < 1 {
 		page = 1
@@ -35,31 +33,16 @@ func GetPosts(c *gin.Context) {
 	if limit < 1 {
 		limit = 5
 	}
+	offset := (page - 1) * limit
 
-	offset := (page - 1) * limit // Вычисление смещения
-
-	// SQL-запрос с лимитом и смещением
-	rows, err := database.DbPostgres.Query("select id, id_author, title, description, date_publication, date_last_modified, likes from posts limit $1 offset $2", limit, offset)
-	if err != nil {
-		utils.Logger.Panic(err)
+	var posts []models.Post
+	if err := database.DbPostgres.Limit(limit).Offset(offset).Find(&posts).Error; err != nil {
+		utils.Logger.Panic("Failed to fetch posts:", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to fetch posts"})
 		return
 	}
-	defer rows.Close()
-
-	for rows.Next() {
-		p := models.Post{}
-		err := rows.Scan(&p.Id, &p.IdAuthor, &p.Title, &p.Description, &p.DatePublication, &p.DateLastModified, &p.Likes)
-		if err != nil {
-			fmt.Println(err)
-			continue
-		}
-		posts = append(posts, p)
-	}
-
-	//utils.Logger.Printf("%v", posts)
 
 	c.JSON(http.StatusOK, posts)
-	posts = []models.Post{}
 }
 
 // @Summary		Get a post by ID
@@ -74,20 +57,20 @@ func GetPosts(c *gin.Context) {
 // @Failure		500	{object}	errorResponse
 // @Router			/v1/posts/{id} [get]
 func GetPostById(c *gin.Context) {
-	//utils.Logger.Info("GetProfileByID is working\n(post_handler.go|GetPostByID|):\n")
 	id := c.Param("id")
+	var post models.Post
 
-	row := database.DbPostgres.QueryRow("select * from posts where id = $1", id)
-	p := models.Post{}
-
-	err := row.Scan(&p.Id, &p.IdAuthor, &p.Title, &p.Description, &p.DatePublication, &p.DateLastModified, &p.Likes)
-	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"message": "post not found"})
-		utils.Logger.Panic("Not correct request|(post_handler.go|GetPostByID|)|:", err)
+	if err := database.DbPostgres.First(&post, id).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			c.JSON(http.StatusNotFound, gin.H{"message": "Post not found"})
+		} else {
+			c.JSON(http.StatusInternalServerError, gin.H{"message": "Internal server error"})
+		}
+		utils.Logger.Panic("Failed to fetch post by ID:", err)
+		return
 	}
 
-	//utils.Logger.Info("Request is done\n(post_handler.go|GetPostByID|):\n")
-	c.JSON(http.StatusOK, p)
+	c.JSON(http.StatusOK, post)
 }
 
 // @Summary		Create a new post
@@ -102,23 +85,20 @@ func GetPostById(c *gin.Context) {
 // @Failure		500	{object}	errorResponse
 // @Router			/v1/posts [post]
 func CreatePost(c *gin.Context) {
-	p := models.Post{}
+	var p models.Post
 
-	if err := c.BindJSON(&p); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"message": "invalid request"})
-		utils.Logger.Panic("Data is bad|(post_handler.go|CreatePost|)|:", err)
+	if err := c.ShouldBindJSON(&p); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Invalid request"})
+		utils.Logger.Panic("Invalid post data:", err)
 		return
 	}
 
-	_, err := database.DbPostgres.Exec("insert into posts (id_author, title, description) values ( $1, $2, $3)",
-		p.IdAuthor, p.Title, p.Description,
-	)
-	if err != nil {
-		utils.Logger.Panic("Insert isn't done(post_handler.go|CreatePost|):", err)
+	if err := database.DbPostgres.Create(&p).Error; err != nil {
+		utils.Logger.Panic("Failed to create post:", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to create post"})
 		return
 	}
-	// fmt.Println(result.LastInsertId()) // не поддерживается (Из-за Postgres)
-	// fmt.Println(result.RowsAffected()) // количество добавленных строк
+
 	c.JSON(http.StatusCreated, p)
 }
 
@@ -137,23 +117,23 @@ func CreatePost(c *gin.Context) {
 // @Router			/v1/posts/{id} [put]
 func UpdatePost(c *gin.Context) {
 	id := c.Param("id")
-	p := models.Post{}
+	var p models.Post
 
-	if err := c.BindJSON(&p); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"message": "invalid request"})
-		utils.Logger.Panic("Data is bad|(post_handler.go|UpdatePost|)|:", err)
+	if err := c.ShouldBindJSON(&p); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Invalid request"})
+		utils.Logger.Panic("Invalid post data for update:", err)
 		return
 	}
 
-	_, err := database.DbPostgres.Exec("UPDATE posts SET title = $1, description = $2, date_last_modified = now()  WHERE id = $3",
-		p.Title, p.Description, id,
-	)
-	if err != nil {
-		utils.Logger.Panic("Insert isn't done(post_handler.go|UpdatePost|):", err)
+	// Обновляем только нужные поля
+	p.DateLastModified = time.Now() // Функция для текущего времени, если есть
+
+	if err := database.DbPostgres.Model(&models.Post{}).Where("id = ?", id).Updates(p).Error; err != nil {
+		utils.Logger.Panic("Failed to update post:", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to update post"})
 		return
 	}
-	//fmt.Println(result.LastInsertId()) // не поддерживается
-	//fmt.Println(result.RowsAffected()) // количество добавленных строк
+
 	c.JSON(http.StatusAccepted, p)
 }
 
@@ -171,12 +151,11 @@ func UpdatePost(c *gin.Context) {
 func DeletePost(c *gin.Context) {
 	id := c.Param("id")
 
-	_, err := database.DbPostgres.Exec("delete from posts where id = $1", id)
-	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"message": "post wasn't deleted"})
-		utils.Logger.Panic("Insert isn't done(post_handler.go|DeletePost|):", err)
+	if err := database.DbPostgres.Delete(&models.Post{}, id).Error; err != nil {
+		utils.Logger.Panic("Failed to delete post:", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to delete post"})
 		return
 	}
 
-	c.JSON(http.StatusAccepted, gin.H{"message": "post was deleted"})
+	c.JSON(http.StatusAccepted, gin.H{"message": "Post was deleted"})
 }

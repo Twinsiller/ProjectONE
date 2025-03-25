@@ -4,14 +4,11 @@ import (
 	database "ProjectONE/internal/database/postgres"
 	"ProjectONE/internal/models"
 	"ProjectONE/pkg/utils"
-	"fmt"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
 )
-
-var comments = []models.Comment{}
 
 // @Summary      Get all comments
 // @Security		ApiKeyAuth
@@ -22,29 +19,15 @@ var comments = []models.Comment{}
 // @Failure      500 {object} errorResponse
 // @Router       /v1/comments [get]
 func GetComments(c *gin.Context) {
-	rows, err := database.DbPostgres.Query("select * from comments")
-	fmt.Println(rows)
-	if err != nil {
-		utils.Logger.Panic(err)
+	var comments []models.Comment
+	result := database.DbPostgres.Find(&comments)
+	if result.Error != nil {
+		utils.Logger.Error("Failed to get comments:", result.Error)
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "failed to get comments"})
 		return
 	}
-	defer rows.Close()
-
-	for rows.Next() {
-		cm := models.Comment{}
-		err := rows.Scan(&cm.Id, &cm.IdAuthor, &cm.Text, &cm.DatePublication, &cm.DatePublication, &cm.IdPost)
-		fmt.Println(cm)
-		if err != nil {
-			fmt.Println(err)
-			continue
-		}
-		comments = append(comments, cm)
-	}
-
-	//utils.Logger.Printf("%v", comments)
 
 	c.JSON(http.StatusOK, comments)
-	comments = []models.Comment{}
 }
 
 // @Summary      Get comment by ID
@@ -57,17 +40,17 @@ func GetComments(c *gin.Context) {
 // @Failure      404  {object}  errorResponse
 // @Router       /v1/comments/{id} [get]
 func GetCommentById(c *gin.Context) {
-	//utils.Logger.Info("GetCommentById is working\n(comment_handler.go|GetCommentById|):\n")
 	id := c.Param("id")
-	row := database.DbPostgres.QueryRow("select * from comments where id = $1", id)
-	cm := models.Comment{}
-	err := row.Scan(&cm.Id, &cm.IdAuthor, &cm.Text, &cm.DatePublication, &cm.DatePublication, &cm.IdPost)
-	if err != nil {
+	var comment models.Comment
+
+	result := database.DbPostgres.First(&comment, id)
+	if result.Error != nil {
+		utils.Logger.Error("Comment not found:", result.Error)
 		c.JSON(http.StatusNotFound, gin.H{"message": "comment not found"})
-		utils.Logger.Panic("Not correct request|(comment_handler.go|GetCommentById|)|:", err)
+		return
 	}
-	//utils.Logger.Info("Request is done(comment_handler.go|GetCommentById|):")
-	c.JSON(http.StatusOK, cm)
+
+	c.JSON(http.StatusOK, comment)
 }
 
 // @Summary      Create a comment
@@ -82,24 +65,23 @@ func GetCommentById(c *gin.Context) {
 // @Failure      500      {object}  errorResponse
 // @Router       /v1/comments [post]
 func CreateComment(c *gin.Context) {
-	cm := models.Comment{}
+	var comment models.Comment
 
-	if err := c.BindJSON(&cm); err != nil {
+	if err := c.ShouldBindJSON(&comment); err != nil {
+		utils.Logger.Error("Invalid comment data:", err)
 		c.JSON(http.StatusBadRequest, gin.H{"message": "invalid request"})
-		utils.Logger.Panic("Data is bad|(comment_handler.go|CreateComment|)|:", err)
 		return
 	}
 
-	_, err := database.DbPostgres.Exec("insert into comments (id_author, id_post, text_comment) values ( $1, $2, $3)",
-		cm.IdAuthor, cm.IdPost, cm.Text,
-	)
-	if err != nil {
-		utils.Logger.Panic("Insert isn't done(comment_handler.go|CreateComment|):", err)
+	comment.DatePublication = time.Now()
+
+	if err := database.DbPostgres.Create(&comment).Error; err != nil {
+		utils.Logger.Error("Failed to create comment:", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "failed to create comment"})
 		return
 	}
-	// fmt.Println(result.LastInsertId()) // не поддерживается (Из-за Postgres)
-	// fmt.Println(result.RowsAffected()) // количество добавленных строк
-	c.JSON(http.StatusCreated, cm)
+
+	c.JSON(http.StatusCreated, comment)
 }
 
 // @Summary      Update a comment
@@ -117,24 +99,33 @@ func CreateComment(c *gin.Context) {
 // @Router       /v1/comments/{id} [put]
 func UpdateComment(c *gin.Context) {
 	id := c.Param("id")
-	cm := models.Comment{}
+	var existingComment models.Comment
 
-	if err := c.BindJSON(&cm); err != nil {
+	if err := database.DbPostgres.First(&existingComment, id).Error; err != nil {
+		utils.Logger.Error("Comment not found:", err)
+		c.JSON(http.StatusNotFound, gin.H{"message": "comment not found"})
+		return
+	}
+
+	var updatedComment models.Comment
+	if err := c.ShouldBindJSON(&updatedComment); err != nil {
+		utils.Logger.Error("Invalid update data:", err)
 		c.JSON(http.StatusBadRequest, gin.H{"message": "invalid request"})
-		utils.Logger.Panic("Data is bad|(comment_handler.go|UpdateComment|)|:", err)
 		return
 	}
 
-	_, err := database.DbPostgres.Exec("UPDATE comments SET id_author = $1, id_post = $2, text_comment = $3, date_last_modified = $4 WHERE id = $7",
-		cm.IdAuthor, cm.IdPost, cm.Text, time.Now(), id,
-	)
-	if err != nil {
-		utils.Logger.Panic("Insert isn't done(comment_handler.go|UpdateComment|):", err)
+	existingComment.Text = updatedComment.Text
+	existingComment.IdAuthor = updatedComment.IdAuthor
+	existingComment.IdPost = updatedComment.IdPost
+	existingComment.DateLastModified = time.Now()
+
+	if err := database.DbPostgres.Save(&existingComment).Error; err != nil {
+		utils.Logger.Error("Failed to update comment:", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "failed to update comment"})
 		return
 	}
-	//fmt.Println(result.LastInsertId()) // не поддерживается
-	//fmt.Println(result.RowsAffected()) // количество добавленных строк
-	c.JSON(http.StatusAccepted, cm)
+
+	c.JSON(http.StatusAccepted, existingComment)
 }
 
 // @Summary      Delete a comment
@@ -149,11 +140,17 @@ func UpdateComment(c *gin.Context) {
 // @Router       /v1/comments/{id} [delete]
 func DeleteComment(c *gin.Context) {
 	id := c.Param("id")
+	var comment models.Comment
 
-	_, err := database.DbPostgres.Exec("delete from comments where id = $1", id)
-	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"message": "profile wasn't deleted"})
-		utils.Logger.Panic("Insert isn't done(comment_handler.go|DeleteComment|):", err)
+	if err := database.DbPostgres.First(&comment, id).Error; err != nil {
+		utils.Logger.Error("Comment not found:", err)
+		c.JSON(http.StatusNotFound, gin.H{"message": "comment not found"})
+		return
+	}
+
+	if err := database.DbPostgres.Delete(&comment).Error; err != nil {
+		utils.Logger.Error("Failed to delete comment:", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "failed to delete comment"})
 		return
 	}
 
