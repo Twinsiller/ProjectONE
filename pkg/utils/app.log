@@ -1,12 +1,80 @@
-{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-03-26T16:19:48+03:00"}
-{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-03-26T16:19:48+03:00"}
-{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-03-26T16:32:46+03:00"}
-{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-03-26T16:32:47+03:00"}
-{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-03-26T18:30:57+03:00"}
-{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-03-26T18:30:57+03:00"}
-{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-03-26T18:33:16+03:00"}
-{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-03-26T18:33:16+03:00"}
-{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-03-26T18:36:00+03:00"}
-{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-03-26T18:36:00+03:00"}
-{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-03-26T18:43:24+03:00"}
-{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-03-26T18:43:24+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-23T11:35:06+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-23T11:35:06+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-23T11:37:37+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-23T11:37:37+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-23T11:38:50+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-23T11:38:50+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-23T11:42:38+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-23T11:42:38+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-23T14:35:58+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-23T14:35:58+03:00"}
+{"level":"panic","msg":"Data is bad|(profile_handler.go|CreateProfile|)|:parsing time \"string\" as \"2006-01-02T15:04:05Z07:00\": cannot parse \"string\" as \"2006\"","time":"2024-12-23T14:40:43+03:00"}
+{"level":"panic","msg":"Data is bad|(profile_handler.go|CreateProfile|)|:parsing time \"\" as \"2006-01-02T15:04:05Z07:00\": cannot parse \"\" as \"2006\"","time":"2024-12-23T14:42:03+03:00"}
+{"level":"panic","msg":"Data is bad|(profile_handler.go|CreateProfile|)|:parsing time \"2006-01-02T15:04:05Z07:00\": extra text: \"07:00\"","time":"2024-12-23T14:42:55+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-23T14:52:19+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-23T14:52:20+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-23T14:56:24+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-23T14:56:24+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-23T14:56:56+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-23T14:56:56+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-23T15:07:17+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-23T15:07:17+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-23T15:13:05+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-23T15:13:05+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-23T15:15:04+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-23T15:15:05+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-23T15:34:03+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-23T15:34:03+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-23T15:41:59+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-23T15:41:59+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2024-12-26T21:18:51+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2024-12-26T21:18:51+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-03-04T20:48:52+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-03-04T20:48:53+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-03-25T17:48:40+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-03-25T17:48:40+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-03-25T18:01:39+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-03-25T18:01:39+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-03-25T18:02:59+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-03-25T18:02:59+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-03-25T18:13:14+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-03-25T18:13:15+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-08T17:26:50+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-08T17:26:50+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-08T17:29:55+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-08T17:29:55+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-08T17:30:37+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-08T17:30:37+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-08T17:31:08+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-08T17:31:08+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-08T17:43:56+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-08T17:43:56+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-08T17:47:03+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-08T17:47:03+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-08T17:58:30+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-08T17:58:30+03:00"}
+{"level":"info","msg":"Передача моделей","time":"2025-04-08T17:58:30+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-08T18:02:23+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-08T18:02:23+03:00"}
+{"level":"info","msg":"Передача моделей","time":"2025-04-08T18:02:23+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-08T18:07:22+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-08T18:07:22+03:00"}
+{"level":"info","msg":"Передача моделей","time":"2025-04-08T18:07:22+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-08T18:08:03+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-08T18:08:03+03:00"}
+{"level":"info","msg":"Передача моделей","time":"2025-04-08T18:08:03+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-08T18:09:10+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-08T18:09:11+03:00"}
+{"level":"info","msg":"Передача моделей","time":"2025-04-08T18:09:11+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-08T18:09:52+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-08T18:09:52+03:00"}
+{"level":"info","msg":"Передача моделей","time":"2025-04-08T18:09:52+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-08T18:10:26+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-08T18:10:26+03:00"}
+{"level":"info","msg":"Передача моделей","time":"2025-04-08T18:10:26+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-08T18:21:15+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-08T18:21:15+03:00"}
+{"level":"info","msg":"Передача моделей","time":"2025-04-08T18:21:15+03:00"}
+{"level":"info","msg":"Успешная передача моделей","time":"2025-04-08T18:21:15+03:00"}
+{"level":"panic","msg":"Insert isn't done(profile_handler.go|CreateProfile|):ОШИБКА: повторяющееся значение ключа нарушает ограничение уникальности \"uni_profiles_nickname\" (SQLSTATE 23505)","time":"2025-04-08T18:29:57+03:00"}
+{"level":"panic","msg":"Insert isn't done(profile_handler.go|CreateProfile|):ОШИБКА: повторяющееся значение ключа нарушает ограничение уникальности \"uni_profiles_nickname\" (SQLSTATE 23505)","time":"2025-04-08T18:30:01+03:00"}

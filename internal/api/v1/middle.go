@@ -116,3 +116,7 @@ func authMiddleware() gin.HandlerFunc {
 		c.Next()
 	}
 }
+
+func shutdown(c *gin.Context) {
+
+}

@@ -58,10 +58,11 @@ func Connect(cfg Config) error {
 	}
 
 	// Проверяем соединение
-
-	if sqlDB, err := DbPostgres.DB(); err != nil {
+	sqlDB, err := DbPostgres.DB()
+	if err != nil {
 		log.Fatal("Ошибка получения sql.DB: ", err)
-	} else if err := sqlDB.Ping(); err != nil {
+	}
+	if err := sqlDB.Ping(); err != nil {
 		log.Fatal("БД недоступна: ", err)
 	}
 
@@ -71,6 +72,15 @@ func Connect(cfg Config) error {
 
 func CreateObjDB(dst ...interface{}) {
 	// dst = &models.Profile{}, &models.Post{}, &models.Comment{}
+	// fmt.Println("ЫЫЫЫЫ ЫЫЫЫЫЫЫ ЫЫЫЫ ЫЫЫЫЫ", dst)
+	// for _, obj := range dst {
+	// 	// Пример с reflection
+	// 	val := reflect.ValueOf(obj)
+	// 	if val.Kind() == reflect.Ptr {
+	// 		val = val.Elem()
+	// 	}
+	// 	fmt.Printf("Тип: %v, Значение: %+v\n", val.Type(), val.Interface())
+	// }
 	if err := DbPostgres.AutoMigrate(dst...); err != nil {
 		log.Fatalf("Ошибка миграции: %v", err)
 	}

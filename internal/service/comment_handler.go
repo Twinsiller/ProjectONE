@@ -99,7 +99,7 @@ func CreateComment(c *gin.Context) {
 // @Router       /v1/comments/{id} [put]
 func UpdateComment(c *gin.Context) {
 	id := c.Param("id")
-	var existingComment models.Comment
+	existingComment := models.Comment{}
 
 	if err := database.DbPostgres.First(&existingComment, id).Error; err != nil {
 		utils.Logger.Error("Comment not found:", err)
@@ -115,9 +115,6 @@ func UpdateComment(c *gin.Context) {
 	}
 
 	existingComment.Text = updatedComment.Text
-	existingComment.IdAuthor = updatedComment.IdAuthor
-	existingComment.IdPost = updatedComment.IdPost
-	existingComment.DateLastModified = time.Now()
 
 	if err := database.DbPostgres.Save(&existingComment).Error; err != nil {
 		utils.Logger.Error("Failed to update comment:", err)

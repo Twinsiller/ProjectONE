@@ -7,17 +7,18 @@ import (
 )
 
 type Profile struct {
-	Id           uint           `json:"id" gorm:"type:serial;primaryKey"`                                // Является первичным ключом
-	Nickname     string         `json:"nickname" gorm:"type:character varying(30);not null;uniqueIndex"` // Индекс для уникальности nickname
-	HashPassword string         `json:"hashpassword" gorm:"type:text;not null"`                          // Хранение пароля как текст
-	Status       bool           `json:"status" gorm:"type:boolean;default:true"`                         // Значение по умолчанию true
-	AccessLevel  int            `json:"accesslevel" gorm:"type:integer;default:1;index"`                 // Индекс для AccessLevel
-	Firstname    string         `json:"firstname" gorm:"type:character varying(30);not null"`
-	Lastname     string         `json:"lastname" gorm:"type:character varying(30);not null"`
-	CreatedAt    time.Time      `json:"createdat" gorm:"autoCreateTime"`   // Автоматически ставится время создания
-	UpdatedAt    time.Time      `json:"updatedat" gorm:"autoUpdateTime"`   // Автоматически обновляется время при изменении
-	DeletedAt    gorm.DeletedAt `json:"deletedat" gorm:"index"`            // Для мягкого удаления с индексом
-	Posts        []Post         `json:"posts" gorm:"foreignKey:ProfileID"` // Связь с моделью Post по ProfileID
+	Id           uint           `json:"id" gorm:"primaryKey"`
+	Nickname     string         `json:"nickname" gorm:"type:varchar(30);not null;unique"`
+	HashPassword string         `json:"hashpassword" gorm:"type:text;not null"`
+	Status       bool           `json:"status" gorm:"default:true"`
+	AccessLevel  uint8          `json:"accesslevel" gorm:"default:1;index"`
+	Firstname    string         `json:"firstname" gorm:"type:varchar(100);not null"`
+	Lastname     string         `json:"lastname" gorm:"type:varchar(100);not null"`
+	CreatedAt    time.Time      `json:"createdat" gorm:"autoCreateTime"`
+	UpdatedAt    time.Time      `json:"updatedat" gorm:"autoUpdateTime"`
+	DeletedAt    gorm.DeletedAt `json:"deletedat" gorm:"index"`
+	Posts        []Post         `json:"posts" gorm:"foreignKey:ProfileID"`
+	Comments     []Comment      `json:"comments" gorm:"foreignKey:ProfileID"`
 }
 
 type ProfileCheck struct {
