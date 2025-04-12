@@ -2,6 +2,13 @@ package v1
 
 import (
 	"ProjectONE/internal/service"
+	"ProjectONE/pkg/utils"
+	"context"
+	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	_ "ProjectONE/docs"
 
@@ -19,6 +26,8 @@ func Apies() {
 	router.POST("/register", service.CreateProfile)
 	// Проверка профиля
 	router.POST("/login", login)
+
+	router.GET("/shutdown")
 
 	routerv1 := router.Group("/v1")
 	// Получение всех профилей
@@ -76,5 +85,45 @@ func Apies() {
 		// Удаление поста
 		comments.DELETE("/:id", service.DeleteComment)
 	}
-	router.Run(":8080")
+
+	//router.Run(":8080") // Это прошлое
+
+	// Создаём кастомный сервер
+	srv := &http.Server{
+		Addr:    ":8080",
+		Handler: router,
+	}
+
+	// Запуск сервера в горутине
+	go func() {
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			utils.Logger.Fatalf("ListenAndServe error: %v", err)
+		}
+	}()
+
+	// Канал для сигналов завершения
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+
+	// Блокировка до получения сигнала
+	<-quit
+
+	if quit ==  
+
+	utils.Logger.Println("Завершение работы сервера...")
+	
+
+	// Таймаут для graceful shutdown
+	ctx, cancel := context.WithTimeout(
+		context.Background(), 
+		5*time.Second,
+	)
+	defer cancel()
+
+	// Остановка сервера
+	if err := srv.Shutdown(ctx); err != nil {
+		utils.Logger.Fatal("Server forced to shutdown:", err)
+	}
+
+	utils.Logger.Println("Server exiting")
 }

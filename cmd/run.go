@@ -23,7 +23,11 @@ func Run() error {
 		return err
 	}
 	defer database.Close()
+
+	utils.Logger.Info("Передача моделей")
 	database.CreateObjDB(&models.Profile{}, &models.Post{}, &models.Comment{})
+	utils.Logger.Info("Успешная передача моделей")
+
 	v1.Apies()
 
 	return nil

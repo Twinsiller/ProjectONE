@@ -72,7 +72,16 @@ func Connect(cfg Config) error {
 
 func CreateObjDB(dst ...interface{}) {
 	// dst = &models.Profile{}, &models.Post{}, &models.Comment{}
-	if err := DbPostgres.AutoMigrate(dst); err != nil {
+	// fmt.Println("ЫЫЫЫЫ ЫЫЫЫЫЫЫ ЫЫЫЫ ЫЫЫЫЫ", dst)
+	// for _, obj := range dst {
+	// 	// Пример с reflection
+	// 	val := reflect.ValueOf(obj)
+	// 	if val.Kind() == reflect.Ptr {
+	// 		val = val.Elem()
+	// 	}
+	// 	fmt.Printf("Тип: %v, Значение: %+v\n", val.Type(), val.Interface())
+	// }
+	if err := DbPostgres.AutoMigrate(dst...); err != nil {
 		log.Fatalf("Ошибка миграции: %v", err)
 	}
 }
