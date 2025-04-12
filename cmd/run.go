@@ -23,7 +23,7 @@ func Run() error {
 		return err
 	}
 	defer database.Close()
-	database.CreateObjDB(&models.Profile{}, &models.Post{}, &models.Comment{})
+	database.CreateObjDB(models.Profile{})
 	v1.Apies()
 
 	return nil

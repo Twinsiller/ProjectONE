@@ -58,11 +58,10 @@ func Connect(cfg Config) error {
 	}
 
 	// Проверяем соединение
-	sqlDB, err := DbPostgres.DB()
-	if err != nil {
+
+	if sqlDB, err := DbPostgres.DB(); err != nil {
 		log.Fatal("Ошибка получения sql.DB: ", err)
-	}
-	if err := sqlDB.Ping(); err != nil {
+	} else if err := sqlDB.Ping(); err != nil {
 		log.Fatal("БД недоступна: ", err)
 	}
 
@@ -72,7 +71,7 @@ func Connect(cfg Config) error {
 
 func CreateObjDB(dst ...interface{}) {
 	// dst = &models.Profile{}, &models.Post{}, &models.Comment{}
-	if err := DbPostgres.AutoMigrate(dst); err != nil {
+	if err := DbPostgres.AutoMigrate(dst...); err != nil {
 		log.Fatalf("Ошибка миграции: %v", err)
 	}
 }

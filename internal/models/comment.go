@@ -16,5 +16,5 @@ type Comment struct {
 
 	// Связи с профилем и постом (исправлено)
 	Author Profile `json:"author" gorm:"foreignKey:IdAuthor;constraint:OnDelete:CASCADE;"`
-	Post   Post    `json:"post" gorm:"foreignKey:IdPost;constraint:OnDelete:CASCADE;"`
+	PostID *Post   `json:"post" gorm:"foreignKey:IdPost;constraint:OnDelete:CASCADE;"`
 }
