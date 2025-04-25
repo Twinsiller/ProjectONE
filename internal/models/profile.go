@@ -20,8 +20,3 @@ type Profile struct {
 	Posts        []Post         `json:"posts" gorm:"foreignKey:ProfileID"`
 	Comments     []Comment      `json:"comments" gorm:"foreignKey:ProfileID"`
 }
-
-type ProfileCheck struct {
-	Nickname     string `json:"nickname"`
-	HashPassword string `json:"hashpassword"`
-}

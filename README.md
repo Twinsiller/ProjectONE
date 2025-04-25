@@ -21,6 +21,7 @@ Hash-Password:
         1.1 
     2. go mod tidy **Обновление модулей**
     3. go get -u 'Библиотека'
+        3.0 go get -u ./... 'Обновить все зависимости до последних совместимых'
         3.1 go get -u github.com/gin-gonic/gin 'Сервер'
         3.2 go get -u github.com/lib/pq 'БД PostgreSQL'
         3.3 go get -u github.com/vzglad-smerti/password_hash 'Хэширование паролей'

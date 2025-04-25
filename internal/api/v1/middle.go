@@ -62,16 +62,21 @@ func login(c *gin.Context) {
 	}
 
 	// Используем GORM для получения данных пользователя
-	var pc models.ProfileCheck
+	var pc models.Profile
 	if err := database.DbPostgres.Where("nickname = ?", creds.Nickname).First(&pc).Error; err != nil {
 		// Если не найдено, то возвращаем ошибку
 		c.JSON(http.StatusUnauthorized, gin.H{"message": "Bad check profile"})
+		utils.Logger.Warn("Bad with login(middle.go|login|): ", err)
 		return
 	}
 
+	fmt.Println(pc.Nickname, "and", pc.HashPassword, "and", creds.Password)
 	// Проверяем, совпадает ли введенный пароль с сохраненным хешом
+	// if ok, err := password.Verify("ZzP5RstQI4RRETvy-CVKqYqLO6LFfeE=$#$16$#$1b7832c4a2be040c782b7dad3bfd78446af6be9db90331955276f452$#$afe31e3d2d01d7ce1279bf2a3aa7c1ae27c276a94088a759cced899bf34e3e15",
+	//  "2"); !ok || err != nil {
 	if ok, err := password.Verify(pc.HashPassword, creds.Password); !ok || err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"message": "Password error!!!"})
+		utils.Logger.Warn("Bad with password(middle.go|login|): ", ok, "||", err)
 		return
 	}
 
@@ -80,6 +85,7 @@ func login(c *gin.Context) {
 	if err != nil {
 		utils.Logger.Error(err)
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "could not create token"})
+		utils.Logger.Warn("Could not create token(middle.go|login|): ", err)
 		return
 	}
 
@@ -115,8 +121,4 @@ func authMiddleware() gin.HandlerFunc {
 		// Если токен валиден, передаем выполнение дальше
 		c.Next()
 	}
-}
-
-func shutdown(c *gin.Context) {
-
 }

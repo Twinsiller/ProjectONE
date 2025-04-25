@@ -106,16 +106,23 @@ func Apies() {
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 
 	// Блокировка до получения сигнала
-	<-quit
+	sig := <-quit // программа здесь "ждёт" сигнал
 
-	if quit ==  
+	utils.Logger.Warn("Завершение работы сервера...")
 
-	utils.Logger.Println("Завершение работы сервера...")
-	
+	if sig == os.Interrupt {
+		utils.Logger.Info("Пойман сигнал (Ctrl + C):", sig)
+	} else {
+		utils.Logger.Info("Вызов из вне (Shutdown()):", sig)
+	}
+
+	if err := service.DumpDataToFile(); err != nil {
+		utils.Logger.Error("Ошибка при выгрузке данных:", err)
+	}
 
 	// Таймаут для graceful shutdown
 	ctx, cancel := context.WithTimeout(
-		context.Background(), 
+		context.Background(),
 		5*time.Second,
 	)
 	defer cancel()
