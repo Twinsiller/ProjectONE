@@ -54,34 +54,37 @@ func generateToken(nickname string) (string, error) {
 // @Failure 500 {object} errorResponse "Internal server error"
 // @Router /login [post]
 func login(c *gin.Context) {
-	var creds Credentials
-	// Привязываем данные из запроса в структуру Credentials
-	if err := c.BindJSON(&creds); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"message": "invalid request"})
+	var req models.LoginProfileRequest
+
+	// Привязываем JSON и валидируем
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Invalid input"})
 		return
 	}
 
-	// Используем GORM для получения данных пользователя
-	var pc models.Profile
-	if err := database.DbPostgres.Where("nickname = ?", creds.Nickname).First(&pc).Error; err != nil {
-		// Если не найдено, то возвращаем ошибку
-		c.JSON(http.StatusUnauthorized, gin.H{"message": "Bad check profile"})
-		utils.Logger.Warn("Bad with login(middle.go|login|): ", err)
+	var p models.Profile
+
+	// Ищем пользователя по nickname
+	if err := database.DbPostgres.
+		Where("nickname = ?", req.Nickname).
+		First(&p).Error; err != nil {
+
+		c.JSON(http.StatusUnauthorized, gin.H{"message": "Profile not found"})
 		return
 	}
 
-	fmt.Println(pc.Nickname, "and", pc.HashPassword, "and", creds.Password)
+	fmt.Println(p.Nickname, "and", p.HashPassword, "and", req.Password)
 	// Проверяем, совпадает ли введенный пароль с сохраненным хешом
 	// if ok, err := password.Verify("ZzP5RstQI4RRETvy-CVKqYqLO6LFfeE=$#$16$#$1b7832c4a2be040c782b7dad3bfd78446af6be9db90331955276f452$#$afe31e3d2d01d7ce1279bf2a3aa7c1ae27c276a94088a759cced899bf34e3e15",
 	//  "2"); !ok || err != nil {
-	if ok, err := password.Verify(pc.HashPassword, creds.Password); !ok || err != nil {
+	if ok, err := password.Verify(p.HashPassword, req.Password); !ok || err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"message": "Password error!!!"})
 		utils.Logger.Warn("Bad with password(middle.go|login|): ", ok, "||", err)
 		return
 	}
 
 	// Генерируем токен
-	token, err := generateToken(creds.Nickname)
+	token, err := generateToken(p.Nickname)
 	if err != nil {
 		utils.Logger.Error(err)
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "could not create token"})
@@ -90,7 +93,10 @@ func login(c *gin.Context) {
 	}
 
 	// Отправляем ответ с токеном
-	c.JSON(http.StatusOK, gin.H{"token": token})
+	c.JSON(http.StatusOK, gin.H{
+		"token":    token,
+		"nickname": p.Nickname,
+	})
 }
 
 // authMiddleware - middleware для проверки валидности JWT токена

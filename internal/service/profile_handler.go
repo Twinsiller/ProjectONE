@@ -4,6 +4,7 @@ import (
 	database "ProjectONE/internal/database/postgres"
 	"ProjectONE/internal/models"
 	"ProjectONE/pkg/utils"
+	"errors"
 	"net/http"
 	"strconv"
 
@@ -97,25 +98,46 @@ func GetProfileById(c *gin.Context) {
 // @Param			profile	body		models.Profile	true	"Profile data"
 // @Success		201	{object}	models.Profile
 // @Failure		400	{object}	errorResponse
+// @Failure		409	{object}	errorResponse
 // @Failure		500	{object}	errorResponse
 // @Router			/register [post]
 func CreateProfile(c *gin.Context) {
-	p := models.Profile{}
+	req := models.CreateProfileRequest{}
 
 	// Парсим JSON из тела запроса в структуру Profile
-	if err := c.BindJSON(&p); err != nil {
+	if err := c.BindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "invalid request"})
 		utils.Logger.Panic("Data is bad|(profile_handler.go|CreateProfile|)|:", err)
 		return
 	}
 
+	// Проверка, есть ли уже такой nickname
+	var existing models.Profile
+	if err := database.DbPostgres.Where("nickname = ?", req.Nickname).First(&existing).Error; err == nil {
+		// Нашли совпадение
+		c.JSON(http.StatusConflict, gin.H{"message": "nickname already taken"})
+		return
+	} else if !errors.Is(err, gorm.ErrRecordNotFound) {
+		// Ошибка при запросе
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "database error"})
+		utils.Logger.Error("DB error when checking nickname (profile_handler.go|CreateProfile):", err)
+		return
+	}
+
 	// Хеширование пароля
-	if hash, err := password.Hash(p.HashPassword); err != nil {
+	hash, err := password.Hash(req.Password)
+	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "Problem with password hashing"})
 		utils.Logger.Panic("Hash wasn't working(profile_handler.go|CreateProfile|):", err)
 		return
-	} else {
-		p.HashPassword = hash
+	}
+
+	p := models.Profile{
+		Nickname:     req.Nickname,
+		HashPassword: hash,
+		AccessLevel:  req.AccessLevel,
+		Firstname:    req.Firstname,
+		Lastname:     req.Lastname,
 	}
 
 	// Создаем новый профиль в базе данных с использованием GORM
@@ -144,21 +166,42 @@ func CreateProfile(c *gin.Context) {
 // @Router			/v1/profiles/{id} [put]
 func UpdateProfile(c *gin.Context) {
 	id := c.Param("id")
-	p := models.Profile{}
+	req := models.CreateProfileRequest{}
 
 	// Парсим JSON из тела запроса
-	if err := c.BindJSON(&p); err != nil {
+	if err := c.BindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"message": "invalid request"})
 		utils.Logger.Panic("Data is bad|(profile_handler.go|UpdateProfile|)|:", err)
 		return
 	}
 
-	// Хеширование пароля
-	if hash, err := password.Hash(p.HashPassword); err != nil {
-		utils.Logger.Panic("Hash wasn't working(profile_handler.go|UpdateProfile|):", err)
+	// Проверка, есть ли такой id
+	var existing models.Profile
+	if err := database.DbPostgres.Where("id = ?", id).First(&existing).Error; err != nil {
+		// Нашли совпадение
+		c.JSON(http.StatusConflict, gin.H{"message": "DB doesn't work"})
 		return
-	} else {
-		p.HashPassword = hash
+	} else if !errors.Is(err, gorm.ErrRecordNotFound) {
+		// Ошибка при запросе
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "database error"})
+		utils.Logger.Error("DB error when checking nickname (profile_handler.go|CreateProfile):", err)
+		return
+	}
+
+	// Хеширование пароля
+	hash, err := password.Hash(req.Password)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Problem with password hashing"})
+		utils.Logger.Panic("Hash wasn't working(profile_handler.go|CreateProfile|):", err)
+		return
+	}
+
+	p := models.Profile{
+		Nickname:     req.Nickname,
+		HashPassword: hash,
+		AccessLevel:  req.AccessLevel,
+		Firstname:    req.Firstname,
+		Lastname:     req.Lastname,
 	}
 
 	// Обновляем профиль по ID с использованием GORM
@@ -168,8 +211,21 @@ func UpdateProfile(c *gin.Context) {
 		return
 	}
 
+	// Использование GORM для поиска профиля по ID
+	var profile models.Profile
+
+	if err := database.DbPostgres.First(&profile, id).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			c.JSON(http.StatusNotFound, gin.H{"message": "profile not found"})
+		} else {
+			c.JSON(http.StatusInternalServerError, gin.H{"message": "internal server error"})
+		}
+		utils.Logger.Panic("Неудачный запрос|(profile_handler.go|GetProfileById|):", err)
+		return
+	}
+
 	// Отправляем успешный ответ с обновленным профилем
-	c.JSON(http.StatusAccepted, p)
+	c.JSON(http.StatusAccepted, profile)
 }
 
 // @Summary		Delete a profile by ID

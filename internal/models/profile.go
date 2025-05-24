@@ -20,3 +20,16 @@ type Profile struct {
 	Posts        []Post         `json:"posts" gorm:"foreignKey:ProfileID"`
 	Comments     []Comment      `json:"comments" gorm:"foreignKey:ProfileID"`
 }
+
+type CreateProfileRequest struct {
+	Nickname    string `json:"nickname"`
+	Password    string `json:"password"`
+	AccessLevel uint8  `json:"access_level"`
+	Firstname   string `json:"firstname"`
+	Lastname    string `json:"lastname"`
+}
+
+type LoginProfileRequest struct {
+	Nickname string `json:"nickname" binding:"required"`
+	Password string `json:"password" binding:"required"`
+}

@@ -1,85 +1,50 @@
-{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-22T18:05:05+03:00"}
-{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-22T18:05:05+03:00"}
-{"level":"info","msg":"Передача моделей","time":"2025-04-22T18:05:05+03:00"}
-{"level":"info","msg":"Успешная передача моделей","time":"2025-04-22T18:05:05+03:00"}
-{"level":"warning","msg":"Завершение работы сервера...","time":"2025-04-22T18:08:41+03:00"}
-{"level":"info","msg":"Пойман сигнал (Ctrl + C):interrupt","time":"2025-04-22T18:08:41+03:00"}
-{"level":"info","msg":"Начинаем выгрузку данных из БД...","time":"2025-04-22T18:08:41+03:00"}
-{"level":"info","msg":"Данные успешно выгружены в dump.json","time":"2025-04-22T18:08:41+03:00"}
-{"level":"info","msg":"Server exiting","time":"2025-04-22T18:08:41+03:00"}
-{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-22T18:08:45+03:00"}
-{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-22T18:08:45+03:00"}
-{"level":"info","msg":"Передача моделей","time":"2025-04-22T18:08:45+03:00"}
-{"level":"info","msg":"Успешная передача моделей","time":"2025-04-22T18:08:46+03:00"}
-{"level":"warning","msg":"Bad with login: ОШИБКА: отношение \"profile_checks\" не существует (SQLSTATE 42P01)","time":"2025-04-22T18:09:27+03:00"}
-{"level":"warning","msg":"Bad with login: ОШИБКА: отношение \"profile_checks\" не существует (SQLSTATE 42P01)","time":"2025-04-22T18:10:05+03:00"}
-{"level":"warning","msg":"Завершение работы сервера...","time":"2025-04-22T18:13:35+03:00"}
-{"level":"info","msg":"Пойман сигнал (Ctrl + C):interrupt","time":"2025-04-22T18:13:35+03:00"}
-{"level":"info","msg":"Начинаем выгрузку данных из БД...","time":"2025-04-22T18:13:35+03:00"}
-{"level":"info","msg":"Данные успешно выгружены в dump.json","time":"2025-04-22T18:13:36+03:00"}
-{"level":"info","msg":"Server exiting","time":"2025-04-22T18:13:36+03:00"}
-{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-22T18:13:43+03:00"}
-{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-22T18:13:43+03:00"}
-{"level":"info","msg":"Передача моделей","time":"2025-04-22T18:13:43+03:00"}
-{"level":"info","msg":"Успешная передача моделей","time":"2025-04-22T18:13:43+03:00"}
-{"level":"warning","msg":"Завершение работы сервера...","time":"2025-04-22T18:20:24+03:00"}
-{"level":"info","msg":"Пойман сигнал (Ctrl + C):interrupt","time":"2025-04-22T18:20:24+03:00"}
-{"level":"info","msg":"Начинаем выгрузку данных из БД...","time":"2025-04-22T18:20:24+03:00"}
-{"level":"info","msg":"Данные успешно выгружены в dump.json","time":"2025-04-22T18:20:24+03:00"}
-{"level":"info","msg":"Server exiting","time":"2025-04-22T18:20:24+03:00"}
-{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-22T18:20:29+03:00"}
-{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-22T18:20:29+03:00"}
-{"level":"info","msg":"Передача моделей","time":"2025-04-22T18:20:29+03:00"}
-{"level":"info","msg":"Успешная передача моделей","time":"2025-04-22T18:20:29+03:00"}
-{"level":"warning","msg":"Bad with password: false||\u003cnil\u003e","time":"2025-04-22T18:20:37+03:00"}
-{"level":"warning","msg":"Завершение работы сервера...","time":"2025-04-22T18:23:50+03:00"}
-{"level":"info","msg":"Пойман сигнал (Ctrl + C):interrupt","time":"2025-04-22T18:23:50+03:00"}
-{"level":"info","msg":"Начинаем выгрузку данных из БД...","time":"2025-04-22T18:23:50+03:00"}
-{"level":"info","msg":"Данные успешно выгружены в dump.json","time":"2025-04-22T18:23:50+03:00"}
-{"level":"info","msg":"Server exiting","time":"2025-04-22T18:23:50+03:00"}
-{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-22T18:23:54+03:00"}
-{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-22T18:23:55+03:00"}
-{"level":"info","msg":"Передача моделей","time":"2025-04-22T18:23:55+03:00"}
-{"level":"info","msg":"Успешная передача моделей","time":"2025-04-22T18:23:55+03:00"}
-{"level":"warning","msg":"Bad with password: false||\u003cnil\u003e","time":"2025-04-22T18:24:05+03:00"}
-{"level":"warning","msg":"Завершение работы сервера...","time":"2025-04-22T18:36:16+03:00"}
-{"level":"info","msg":"Пойман сигнал (Ctrl + C):interrupt","time":"2025-04-22T18:36:16+03:00"}
-{"level":"info","msg":"Начинаем выгрузку данных из БД...","time":"2025-04-22T18:36:16+03:00"}
-{"level":"info","msg":"Данные успешно выгружены в dump.json","time":"2025-04-22T18:36:16+03:00"}
-{"level":"info","msg":"Server exiting","time":"2025-04-22T18:36:16+03:00"}
-{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-22T18:36:20+03:00"}
-{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-22T18:36:20+03:00"}
-{"level":"info","msg":"Передача моделей","time":"2025-04-22T18:36:20+03:00"}
-{"level":"info","msg":"Успешная передача моделей","time":"2025-04-22T18:36:21+03:00"}
-{"level":"warning","msg":"Bad with password(middle.go|login|): false||\u003cnil\u003e","time":"2025-04-22T18:36:26+03:00"}
-{"level":"warning","msg":"Bad with password(middle.go|login|): false||\u003cnil\u003e","time":"2025-04-22T18:36:52+03:00"}
-{"level":"warning","msg":"Завершение работы сервера...","time":"2025-04-22T18:49:30+03:00"}
-{"level":"info","msg":"Пойман сигнал (Ctrl + C):interrupt","time":"2025-04-22T18:49:30+03:00"}
-{"level":"info","msg":"Начинаем выгрузку данных из БД...","time":"2025-04-22T18:49:30+03:00"}
-{"level":"info","msg":"Данные успешно выгружены в dump.json","time":"2025-04-22T18:49:30+03:00"}
-{"level":"info","msg":"Server exiting","time":"2025-04-22T18:49:30+03:00"}
-{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-22T18:49:38+03:00"}
-{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-22T18:49:39+03:00"}
-{"level":"info","msg":"Передача моделей","time":"2025-04-22T18:49:39+03:00"}
-{"level":"info","msg":"Успешная передача моделей","time":"2025-04-22T18:49:39+03:00"}
-{"level":"warning","msg":"Bad with password(middle.go|login|): false||\u003cnil\u003e","time":"2025-04-22T18:49:54+03:00"}
-{"level":"warning","msg":"Завершение работы сервера...","time":"2025-04-22T18:59:41+03:00"}
-{"level":"info","msg":"Пойман сигнал (Ctrl + C):interrupt","time":"2025-04-22T18:59:41+03:00"}
-{"level":"info","msg":"Начинаем выгрузку данных из БД...","time":"2025-04-22T18:59:41+03:00"}
-{"level":"info","msg":"Данные успешно выгружены в dump.json","time":"2025-04-22T18:59:41+03:00"}
-{"level":"info","msg":"Server exiting","time":"2025-04-22T18:59:41+03:00"}
-{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-22T19:01:22+03:00"}
-{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-22T19:01:22+03:00"}
-{"level":"info","msg":"Передача моделей","time":"2025-04-22T19:01:22+03:00"}
-{"level":"info","msg":"Успешная передача моделей","time":"2025-04-22T19:01:23+03:00"}
-{"level":"warning","msg":"Bad with password(middle.go|login|): false||\u003cnil\u003e","time":"2025-04-22T19:01:30+03:00"}
-{"level":"warning","msg":"Завершение работы сервера...","time":"2025-04-22T19:18:18+03:00"}
-{"level":"info","msg":"Пойман сигнал (Ctrl + C):interrupt","time":"2025-04-22T19:18:18+03:00"}
-{"level":"info","msg":"Начинаем выгрузку данных из БД...","time":"2025-04-22T19:18:18+03:00"}
-{"level":"info","msg":"Данные успешно выгружены в dump.json","time":"2025-04-22T19:18:18+03:00"}
-{"level":"info","msg":"Server exiting","time":"2025-04-22T19:18:18+03:00"}
-{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-04-22T19:19:37+03:00"}
-{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-04-22T19:19:38+03:00"}
-{"level":"info","msg":"Передача моделей","time":"2025-04-22T19:19:38+03:00"}
-{"level":"info","msg":"Успешная передача моделей","time":"2025-04-22T19:19:38+03:00"}
-{"level":"warning","msg":"Bad with password(middle.go|login|): false||\u003cnil\u003e","time":"2025-04-22T19:19:56+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-05-06T17:03:34+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-05-06T17:03:34+03:00"}
+{"level":"info","msg":"Передача моделей","time":"2025-05-06T17:03:34+03:00"}
+{"level":"info","msg":"Успешная передача моделей","time":"2025-05-06T17:03:34+03:00"}
+{"level":"warning","msg":"Bad with password(middle.go|login|): false||\u003cnil\u003e","time":"2025-05-06T17:09:21+03:00"}
+{"level":"warning","msg":"Завершение работы сервера...","time":"2025-05-06T17:39:46+03:00"}
+{"level":"info","msg":"Пойман сигнал (Ctrl + C):interrupt","time":"2025-05-06T17:39:46+03:00"}
+{"level":"info","msg":"Начинаем выгрузку данных из БД...","time":"2025-05-06T17:39:46+03:00"}
+{"level":"info","msg":"Данные успешно выгружены в dump.json","time":"2025-05-06T17:39:46+03:00"}
+{"level":"info","msg":"Server exiting","time":"2025-05-06T17:39:46+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-05-06T17:53:33+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-05-06T17:53:33+03:00"}
+{"level":"info","msg":"Передача моделей","time":"2025-05-06T17:53:33+03:00"}
+{"level":"info","msg":"Успешная передача моделей","time":"2025-05-06T17:53:33+03:00"}
+{"level":"panic","msg":"Insert isn't done(profile_handler.go|CreateProfile|):ОШИБКА: повторяющееся значение ключа нарушает ограничение уникальности \"uni_profiles_nickname\" (SQLSTATE 23505)","time":"2025-05-06T17:53:49+03:00"}
+{"level":"warning","msg":"Завершение работы сервера...","time":"2025-05-06T18:18:26+03:00"}
+{"level":"info","msg":"Пойман сигнал (Ctrl + C):interrupt","time":"2025-05-06T18:18:26+03:00"}
+{"level":"info","msg":"Начинаем выгрузку данных из БД...","time":"2025-05-06T18:18:26+03:00"}
+{"level":"info","msg":"Данные успешно выгружены в dump.json","time":"2025-05-06T18:18:26+03:00"}
+{"level":"info","msg":"Server exiting","time":"2025-05-06T18:18:26+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-05-06T18:18:31+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-05-06T18:18:31+03:00"}
+{"level":"info","msg":"Передача моделей","time":"2025-05-06T18:18:31+03:00"}
+{"level":"info","msg":"Успешная передача моделей","time":"2025-05-06T18:18:32+03:00"}
+{"level":"panic","msg":"Data is bad|(profile_handler.go|UpdateProfile|)|:json: cannot unmarshal number 351 into Go struct field Profile.accesslevel of type uint8","time":"2025-05-06T19:04:40+03:00"}
+{"level":"warning","msg":"Завершение работы сервера...","time":"2025-05-06T19:22:04+03:00"}
+{"level":"info","msg":"Пойман сигнал (Ctrl + C):interrupt","time":"2025-05-06T19:22:04+03:00"}
+{"level":"info","msg":"Начинаем выгрузку данных из БД...","time":"2025-05-06T19:22:04+03:00"}
+{"level":"info","msg":"Данные успешно выгружены в dump.json","time":"2025-05-06T19:22:04+03:00"}
+{"level":"info","msg":"Server exiting","time":"2025-05-06T19:22:04+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-05-06T19:22:10+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-05-06T19:22:10+03:00"}
+{"level":"info","msg":"Передача моделей","time":"2025-05-06T19:22:10+03:00"}
+{"level":"info","msg":"Успешная передача моделей","time":"2025-05-06T19:22:10+03:00"}
+{"level":"panic","msg":"Неудачный запрос|(profile_handler.go|GetProfileById|):record not found","time":"2025-05-06T19:22:34+03:00"}
+{"level":"warning","msg":"Завершение работы сервера...","time":"2025-05-06T19:25:06+03:00"}
+{"level":"info","msg":"Пойман сигнал (Ctrl + C):interrupt","time":"2025-05-06T19:25:06+03:00"}
+{"level":"info","msg":"Начинаем выгрузку данных из БД...","time":"2025-05-06T19:25:06+03:00"}
+{"level":"info","msg":"Данные успешно выгружены в dump.json","time":"2025-05-06T19:25:06+03:00"}
+{"level":"info","msg":"Server exiting","time":"2025-05-06T19:25:06+03:00"}
+{"level":"info","msg":"Проверка подключения\nuser=postgres password=qwerty host=localhost port=5432 dbname=ProjectONE sslmode=disable","time":"2025-05-06T19:27:37+03:00"}
+{"level":"info","msg":"Успешное подключение к базе данных","time":"2025-05-06T19:27:38+03:00"}
+{"level":"info","msg":"Передача моделей","time":"2025-05-06T19:27:38+03:00"}
+{"level":"info","msg":"Успешная передача моделей","time":"2025-05-06T19:27:38+03:00"}
+{"level":"error","msg":"DB error when checking nickname (profile_handler.go|CreateProfile):\u003cnil\u003e","time":"2025-05-06T19:27:46+03:00"}
+{"level":"warning","msg":"Завершение работы сервера...","time":"2025-05-06T19:29:00+03:00"}
+{"level":"info","msg":"Пойман сигнал (Ctrl + C):interrupt","time":"2025-05-06T19:29:00+03:00"}
+{"level":"info","msg":"Начинаем выгрузку данных из БД...","time":"2025-05-06T19:29:00+03:00"}
+{"level":"info","msg":"Данные успешно выгружены в dump.json","time":"2025-05-06T19:29:00+03:00"}
+{"level":"info","msg":"Server exiting","time":"2025-05-06T19:29:00+03:00"}
